@@ -18,27 +18,8 @@ use Oro\Bundle\EntityBundle\EntityProperty\UpdatedByAwareTrait;
 /**
  * @ORM\Entity(repositoryClass="Oro\Bundle\IssueBundle\Entity\Repository\IssueRepository")
  * @ORM\Table(name="oro_issue")
- * @Config(
- *      defaultValues={
- *          "entity"={
- *              "icon"="icon-comment-alt"
- *          },
- *          "ownership"={
- *              "owner_type"="USER",
- *              "owner_field_name"="owner",
- *              "owner_column_name"="user_owner_id",
- *              "organization_field_name"="organization",
- *              "organization_column_name"="organization_id"
- *          },
- *          "security"={
- *              "type"="ACL",
- *              "group_name"=""
- *          },
- *          "activity"={
- *              "immutable"=true
- *          }
- *      }
- * )
+ * @Config
+ *
  */
 class Issue extends ExtendIssue implements DatesAwareInterface, UpdatedByAwareInterface
 {
@@ -93,4 +74,160 @@ class Issue extends ExtendIssue implements DatesAwareInterface, UpdatedByAwareIn
      */
     protected $assignee;
 
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set code
+     *
+     * @param string $code
+     *
+     * @return Issue
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Set summary
+     *
+     * @param string $summary
+     *
+     * @return Issue
+     */
+    public function setSummary($summary)
+    {
+        $this->summary = $summary;
+
+        return $this;
+    }
+
+    /**
+     * Get summary
+     *
+     * @return string
+     */
+    public function getSummary()
+    {
+        return $this->summary;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Issue
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set reporter
+     *
+     * @param \Oro\Bundle\UserBundle\Entity\User $reporter
+     *
+     * @return Issue
+     */
+    public function setReporter(\Oro\Bundle\UserBundle\Entity\User $reporter = null)
+    {
+        $this->reporter = $reporter;
+
+        return $this;
+    }
+
+    /**
+     * Get reporter
+     *
+     * @return \Oro\Bundle\UserBundle\Entity\User
+     */
+    public function getReporter()
+    {
+        return $this->reporter;
+    }
+
+    /**
+     * Set assignee
+     *
+     * @param \Oro\Bundle\UserBundle\Entity\User $assignee
+     *
+     * @return Issue
+     */
+    public function setAssignee(\Oro\Bundle\UserBundle\Entity\User $assignee = null)
+    {
+        $this->assignee = $assignee;
+
+        return $this;
+    }
+
+    /**
+     * Get assignee
+     *
+     * @return \Oro\Bundle\UserBundle\Entity\User
+     */
+    public function getAssignee()
+    {
+        return $this->assignee;
+    }
+
+    /**
+     * @return Reporter|null $owner
+     */
+    public function getOwner()
+    {
+        if (null !== $this->reporter) {
+            return $this->reporter;
+        }
+
+        return null;
+    }
+
+    /**
+     * @param Reporter|null $owner
+     */
+    public function setOwner($owner)
+    {
+        if (null === $owner) {
+            $this->reporter = null;
+        } elseif ($owner instanceof User) {
+            $this->reporter = $owner;
+        } else {
+            throw new \InvalidArgumentException('Owner needs to be a user or a contact');
+        }
+    }
 }

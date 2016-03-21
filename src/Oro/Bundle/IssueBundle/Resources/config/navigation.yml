@@ -1,0 +1,22 @@
+oro_menu_config:
+    items:
+        issue_tab:
+            label: Issue label
+            uri:   '#'
+            extras:
+                position: 300
+        issue_tab_link:
+            label: Issue link label
+            route: issue_link
+        issue_create:
+            label: Create Issue
+            route: issue_create
+    tree:
+        application_menu:
+            children:
+                issue_tab:
+                    children:
+                        issue_tab_link: ~
+
+oro_titles:
+    issue_link: My issue page title
