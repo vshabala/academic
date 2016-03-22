@@ -1,0 +1,12 @@
+oro:
+    issue:
+        controller:
+            issue.saved.message: "Issue saved"
+        form:
+            code.label: "Code"
+            summary.label: "Summary"
+            description.label: "Description"
+            reporter.label: "Reporter"
+            assignee.label: "Assignee"
+        entity_label: "Issue"
+        entity_plural_label: "Issues"

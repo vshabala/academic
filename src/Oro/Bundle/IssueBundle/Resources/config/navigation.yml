@@ -7,7 +7,7 @@ oro_menu_config:
                 position: 300
         issue_tab_link:
             label: Issue link label
-            route: issue_link
+            route: issue_index
         issue_create:
             label: Create Issue
             route: issue_create
