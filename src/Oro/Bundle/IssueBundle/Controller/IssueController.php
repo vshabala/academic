@@ -8,16 +8,25 @@ use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
 
 class IssueController extends Controller
 {
     /**
      * @Route("", name="issue_index")
      * @Template()
+     * @Acl(
+     *      id="oro_issue_view",
+     *      type="entity",
+     *      class="OroIssueBundle:Issue",
+     *      permission="VIEW"
+     * )
      */
     public function indexAction()
     {
-        return array('message' => "This is a new Issue Bundle");
+        return array('gridName' => 'issue-grid');
+        //return array('message' => "This is a new Issue Bundle");
+
     }
 
 
@@ -31,38 +40,29 @@ class IssueController extends Controller
      * )
      * @Template("OroIssueBundle:Issue:update.html.twig")
      */
-    public function createAction()
+    public function createAction(Request $request)
     {
-        return $this->update(new Issue());
+        return $this->update(new Issue(), $request);
     }
 
-    /**
-     * @Route("/create",  name="issue_create1")
-     * @Template("OroIssueBundle:Default:update.html.twig")
-     */
-    public function createActionMy()
-    {
-        $issue = new Issue();
-
-        $form = $this->createFormBuilder($issue)
-            ->add('code', 'text')
-            ->add('summary', 'textarea')
-            ->add('description', 'textarea')
-            ->add('save', 'submit', array('label' => 'Create Issue'))
-            ->getForm();
-
-        return $this->render('OroIssueBundle:Default:update.html.twig', array(
-            'form' => $form->createView(),
-        ));
-    }
 
     /**
      * @Route("/update", name="issue_update")
+     * @Route("/update/{id}", name="issue_update", requirements={"id":"\d+"}, defaults={"id":0})
      * @Template()
      */
-    public function updateAction()
+    public function updateAction(Issue $issue, Request $request)
     {
+        return $this->update($issue, $request);
+    }
 
+    /**
+     * @Route("/{id}", name="issue_view", requirements={"id"="\d+"})
+     * @Template
+     */
+    public function viewAction(Issue $issue)
+    {
+        return array('issue' => $issue);
     }
 
 
@@ -75,24 +75,31 @@ class IssueController extends Controller
 
     }
 
-    /**
-     * @param Issue $entity
-     * @return array|RedirectResponse
-     */
-    protected function update(Issue $entity)
-    {
-        if ($this->get('oro_issue.form.handler.issue')->process($entity)) {
-            $this->get('session')->getFlashBag()->add(
-                'success',
-                $this->get('translator')->trans('oro.issue.controller.issue.saved.message')
-            );
 
-            return $this->redirect($this->generateUrl('issue_link'));
+    private function update(Issue $issue, Request $request)
+    {
+        $form = $this->get('form.factory')->create('oro_issue_issue', $issue);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($issue);
+            $entityManager->flush();
+
+            return $this->get('oro_ui.router')->redirectAfterSave(
+                array(
+                    'route' => 'issue_index',
+                   // 'parameters' => array('id' => $issue->getId()),
+                ),
+                array('route' => 'issue_index'),
+                $issue
+            );
         }
 
         return array(
-            'entity' => $entity,
-            'form' => $this->get('oro_issue.form.issue')->createView(),
+            'entity' => $issue,
+            'form' => $form->createView(),
         );
     }
 }

@@ -31,8 +31,9 @@ class IssueType extends AbstractType
         $resolver->setDefaults(
             array(
                 'data_class' => 'Oro\Bundle\IssueBundle\Entity\Issue',
-                'intention'  => 'issue',
+               // 'intention'  => 'issue',
                 'ownership_disabled'      => true,
+               // 'organization_disabled'      => true,
             )
         );
     }

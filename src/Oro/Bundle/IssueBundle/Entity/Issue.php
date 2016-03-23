@@ -3,7 +3,9 @@
 namespace Oro\Bundle\IssueBundle\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
-
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Oro\Bundle\OrganizationBundle\Entity\Organization;
 use Doctrine\ORM\Mapping as ORM;
 
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
@@ -11,20 +13,21 @@ use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
 use Oro\Bundle\IssueBundle\Model\ExtendIssue;
 use Oro\Bundle\UserBundle\Entity\User;
 use Oro\Bundle\EntityBundle\EntityProperty\DatesAwareInterface;
-use Oro\Bundle\EntityBundle\EntityProperty\UpdatedByAwareInterface;
 use Oro\Bundle\EntityBundle\EntityProperty\DatesAwareTrait;
-use Oro\Bundle\EntityBundle\EntityProperty\UpdatedByAwareTrait;
+use Oro\Bundle\WorkflowBundle\Entity\WorkflowItem;
+use Oro\Bundle\WorkflowBundle\Entity\WorkflowStep;
 
 /**
  * @ORM\Entity(repositoryClass="Oro\Bundle\IssueBundle\Entity\Repository\IssueRepository")
  * @ORM\Table(name="oro_issue")
- * @Config
+ * @Config(
+ *     )
  *
  */
-class Issue extends ExtendIssue implements DatesAwareInterface, UpdatedByAwareInterface
+class Issue extends ExtendIssue implements DatesAwareInterface
 {
     use DatesAwareTrait;
-    use UpdatedByAwareTrait;
+
 
     const ENTITY_NAME = 'Oro\Bundle\IssueBundle\Entity\Issue';
 
@@ -43,6 +46,14 @@ class Issue extends ExtendIssue implements DatesAwareInterface, UpdatedByAwareIn
      * @ORM\Column(name="code", type="string", length=50, nullable=false)
      */
     protected $code;
+
+    /**
+     * @var Organization
+     *
+     * @ORM\ManyToOne(targetEntity="Oro\Bundle\OrganizationBundle\Entity\Organization")
+     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $organization;
 
     /**
      * @var string $summary
@@ -73,7 +84,7 @@ class Issue extends ExtendIssue implements DatesAwareInterface, UpdatedByAwareIn
      * @ORM\JoinColumn(name="user_assignee_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $assignee;
-
+    
 
     /**
      * Get id
@@ -205,29 +216,47 @@ class Issue extends ExtendIssue implements DatesAwareInterface, UpdatedByAwareIn
         return $this->assignee;
     }
 
-    /**
-     * @return Reporter|null $owner
-     */
-    public function getOwner()
-    {
-        if (null !== $this->reporter) {
-            return $this->reporter;
-        }
 
-        return null;
+    /**
+     * Set organization
+     *
+     * @param \Oro\Bundle\OrganizationBundle\Entity\Organization $organization
+     *
+     * @return Issue
+     */
+    public function setOrganization(\Oro\Bundle\OrganizationBundle\Entity\Organization $organization = null)
+    {
+        $this->organization = $organization;
+
+        return $this;
     }
 
     /**
-     * @param Reporter|null $owner
+     * Get organization
+     *
+     * @return \Oro\Bundle\OrganizationBundle\Entity\Organization
      */
-    public function setOwner($owner)
+    public function getOrganization()
     {
-        if (null === $owner) {
-            $this->reporter = null;
-        } elseif ($owner instanceof User) {
-            $this->reporter = $owner;
-        } else {
-            throw new \InvalidArgumentException('Owner needs to be a user or a contact');
-        }
+        return $this->organization;
+    }
+
+    /**
+     * @return User
+     */
+    public function getOwner()
+    {
+        return $this->reporter;
+    }
+
+    /**
+     * @param User $owningUser
+     * @return Tag
+     */
+    public function setOwner($owningUser)
+    {
+        $this->reporter = $owningUser;
+
+        return $this;
     }
 }

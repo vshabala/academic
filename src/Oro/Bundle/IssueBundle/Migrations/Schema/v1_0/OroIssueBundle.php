@@ -29,26 +29,27 @@ class OroIssueBundle implements Migration
         $table->addColumn('code', 'string', ['length' => 50]);
         $table->addColumn('summary', 'text');
         $table->addColumn('description', 'text');
-        $table->addColumn('reporter', 'integer', ['notnull' => false]);
-        $table->addColumn('assignee', 'integer', ['notnull' => false]);
+        $table->addColumn('user_reporter_id', 'integer', ['notnull' => false]);
+        $table->addColumn('user_assignee_id', 'integer', ['notnull' => false]);
+        $table->addColumn('organization_id', 'integer', ['notnull' => false]);
 
         $table->addColumn('created_at', 'datetime', []);
         $table->addColumn('updated_at', 'datetime', []);
         
         $table->setPrimaryKey(['id']);
-        $table->addIndex(['reporter'], 'IDX_BA066CE19EB185F9', []);
-        $table->addIndex(['assignee'], 'IDX_BA066CE12793CC5E', []);
+        $table->addIndex(['user_reporter_id'], 'IDX_BA066CE19EB185F9', []);
+        $table->addIndex(['user_assignee_id'], 'IDX_BA066CE12793CC5E', []);
 
         $table->addForeignKeyConstraint(
             $schema->getTable('oro_user'),
-            ['reporter'],
+            ['user_reporter_id'],
             ['id'],
             ['onDelete' => 'SET NULL', 'onUpdate' => null]
         );
 
         $table->addForeignKeyConstraint(
             $schema->getTable('oro_user'),
-            ['assignee'],
+            ['user_assignee_id'],
             ['id'],
             ['onDelete' => 'SET NULL', 'onUpdate' => null]
         );

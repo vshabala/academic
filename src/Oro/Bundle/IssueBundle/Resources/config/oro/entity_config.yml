@@ -14,7 +14,7 @@ oro_entity_config:
                             block:          associations
                             required:       true
                             label:          oro.issue.enabled
-                            association_class: 'OroIssueBundle:Note'
+                            association_class: 'OroNoteBundle:Note'
 
                 # this attribute can be used to prohibit changing the note association state (no matter whether
                 # it is enabled or not) for the entity
