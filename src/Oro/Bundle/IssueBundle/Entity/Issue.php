@@ -21,6 +21,11 @@ use Oro\Bundle\WorkflowBundle\Entity\WorkflowStep;
  * @ORM\Entity(repositoryClass="Oro\Bundle\IssueBundle\Entity\Repository\IssueRepository")
  * @ORM\Table(name="oro_issue")
  * @Config(
+ *     defaultValues={
+ *      "workflow"={
+ *          "active_workflow"="issue_flow"
+ *      }
+ *     }
  *     )
  *
  */
@@ -84,6 +89,22 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      * @ORM\JoinColumn(name="user_assignee_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $assignee;
+
+    /**
+     * @var WorkflowItem
+     *
+     * @ORM\OneToOne(targetEntity="Oro\Bundle\WorkflowBundle\Entity\WorkflowItem")
+     * @ORM\JoinColumn(name="workflow_item_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $workflowItem;
+
+    /**
+     * @var WorkflowStep
+     *
+     * @ORM\ManyToOne(targetEntity="Oro\Bundle\WorkflowBundle\Entity\WorkflowStep")
+     * @ORM\JoinColumn(name="workflow_step_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $workflowStep;
     
 
     /**
@@ -192,6 +213,8 @@ class Issue extends ExtendIssue implements DatesAwareInterface
         return $this->reporter;
     }
 
+
+
     /**
      * Set assignee
      *
@@ -258,5 +281,53 @@ class Issue extends ExtendIssue implements DatesAwareInterface
         $this->reporter = $owningUser;
 
         return $this;
+    }
+
+    /**
+     * Set workflowStep
+     *
+     * @param \Oro\Bundle\WorkflowBundle\Entity\WorkflowStep $workflowStep
+     *
+     * @return Issue
+     */
+    public function setWorkflowStep(\Oro\Bundle\WorkflowBundle\Entity\WorkflowStep $workflowStep = null)
+    {
+        $this->workflowStep = $workflowStep;
+
+        return $this;
+    }
+
+    /**
+     * Get workflowStep
+     *
+     * @return \Oro\Bundle\WorkflowBundle\Entity\WorkflowStep
+     */
+    public function getWorkflowStep()
+    {
+        return $this->workflowStep;
+    }
+
+    /**
+     * Set workflowItem
+     *
+     * @param \Oro\Bundle\WorkflowBundle\Entity\WorkflowItem $workflowItem
+     *
+     * @return Issue
+     */
+    public function setWorkflowItem(\Oro\Bundle\WorkflowBundle\Entity\WorkflowItem $workflowItem = null)
+    {
+        $this->workflowItem = $workflowItem;
+
+        return $this;
+    }
+
+    /**
+     * Get workflowItem
+     *
+     * @return \Oro\Bundle\WorkflowBundle\Entity\WorkflowItem
+     */
+    public function getWorkflowItem()
+    {
+        return $this->workflowItem;
     }
 }
