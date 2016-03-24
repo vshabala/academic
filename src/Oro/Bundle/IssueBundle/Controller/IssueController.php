@@ -62,7 +62,7 @@ class IssueController extends Controller
      */
     public function viewAction(Issue $issue)
     {
-        return array('issue' => $issue);
+        return array('entity' => $issue);
     }
 
 
