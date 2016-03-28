@@ -26,16 +26,23 @@ use Oro\Bundle\WorkflowBundle\Entity\WorkflowStep;
  *      "workflow"={
  *          "active_workflow"="issue_flow"
  *      },
+ *      "ownership"={
+ *              "owner_type"="USER",
+ *              "owner_field_name"="reporter",
+ *              "owner_column_name"="user_reporter_id",
+ *              "organization_field_name"="organization",
+ *              "organization_column_name"="organization_id"
+ *          },
  *      "dataaudit"={
  *              "auditable"=true
  *          },
  *      "tag"={
  *              "enabled"=true
  *          },
- *      "security"={
+ *       "security"={
  *              "type"="ACL",
- *              "permissions"="All"
- *          }
+ *              "group_name"=""
+ *          },
  *     }
  *     )
  *

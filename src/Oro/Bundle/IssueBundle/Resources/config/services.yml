@@ -1,7 +1,7 @@
 parameters:
     oro_issue.issue.entity.class: Oro\Bundle\IssueBundle\Entity\Issue
     oro_issue.issue.manager.class:  Oro\Bundle\IssueBundle\Entity\IssueManager
-
+    oro_issue.issue.manager.api.class:  Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager
 
 services:
     oro_issue.issue.manager:
@@ -10,3 +10,10 @@ services:
             - @doctrine.orm.entity_manager
             - %oro_issue.issue.entity.class%
             - @router
+    oro_issue.issue.manager.api:
+        class: %oro_issue.issue.manager.api.class%
+        parent: oro_soap.manager.entity_manager.abstract
+        arguments:
+            - %oro_issue.issue.entity.class%
+            - @doctrine.orm.entity_manager
+

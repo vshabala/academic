@@ -25,7 +25,8 @@ class IssueController extends Controller
     public function indexAction()
     {
         return [
-            'entity_class' =>'Oro\Bundle\IssueBundle\Entity\Issue' //$this->container->getParameter('oro_issue.issue.entity.class')
+           // 'entity_class' =>'Oro\Bundle\IssueBundle\Entity\Issue'
+            $this->container->getParameter('oro_issue.issue.entity.class')
         ];
         //return array('gridName' => 'issue-grid');
 
@@ -77,24 +78,7 @@ class IssueController extends Controller
     {
         return array('entity' => $issue);
     }
-
-
-    /**
-     * @Route("/delete", name="issue_delete")
-     * @Acl(
-     *      id="oro_issue_delete",
-     *      type="entity",
-     *      class="OroIssueBundle:Issue",
-     *      permission="DELETE"
-     * )
-     * @Template()
-     */
-    public function deleteAction()
-    {
-
-    }
-
-
+    
     private function update(Issue $issue, Request $request)
     {
         $form = $this->get('form.factory')->create('oro_issue_issue', $issue);
