@@ -42,7 +42,8 @@ class OroIssueBundle implements Migration
         $table->addIndex(['user_reporter_id'], 'IDX_BA066CE19EB185F9', []);
         $table->addIndex(['user_assignee_id'], 'IDX_BA066CE12793CC5E', []);
         $table->addIndex(['workflow_item_id'], 'IDX_814DEE3F71FE882C', []);
-        $table->addIndex(['workflow_step_id'], 'IDX_814DEE3F71FE882C', []);
+        $table->addIndex(['workflow_step_id'], 'IDX_814DEE3F71FE882F', []);
+
 
         $table->addForeignKeyConstraint(
             $schema->getTable('oro_user'),
