@@ -1,0 +1,12 @@
+parameters:
+    oro_issue.issue.entity.class: Oro\Bundle\IssueBundle\Entity\Issue
+    oro_issue.issue.manager.class:  Oro\Bundle\IssueBundle\Entity\IssueManager
+
+
+services:
+    oro_issue.issue.manager:
+        class: %oro_issue.issue.manager.class%
+        arguments:
+            - @doctrine.orm.entity_manager
+            - %oro_issue.issue.entity.class%
+            - @router

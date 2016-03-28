@@ -1,0 +1,98 @@
+datagrid:
+    issue-grid:
+        source:
+            type: orm
+            query:
+                select:
+                    - v.id
+                    - v.code
+                    - v.summary
+                    - CONCAT(rep.firstName, CONCAT(' ', rep.lastName)) as reporterName
+                    - CONCAT(ass.firstName, CONCAT(' ', ass.lastName)) as assigneeName
+                    - v.createdAt
+                    - v.updatedAt
+                from:
+                    - { table: OroIssueBundle:Issue, alias: v }
+                join:
+                    left:
+                        - { join: v.reporter, alias: rep }
+                        - { join: v.assignee, alias: ass }
+        columns:
+            code:
+                label: Code
+            summary:
+                label: Summary
+            reporterName:
+                label: Reporter
+            assigneeName:
+                label: Assignee
+            createdAt:
+                label: created
+                frontend_type: date
+            updatedAt:
+                label: updated
+                frontend_type: date
+        properties:
+            id: ~
+            update_link:
+                type: url
+                route: issue_update
+                params:
+                    - id
+            view_link:
+                type: url
+                route: issue_view
+                params:
+                    - id
+            delete_link:
+                type: url
+                route: issue_delete
+                params:
+                    - id
+        sorters:
+            columns:
+                code:
+                    data_name: v.code
+                summary:
+                    data_name: v.summary
+                reporterName:
+                    data_name: reporterName
+                assigneeName:
+                    data_name: assigneeName
+                createdAt:
+                    data_name: v.createdAt
+                updatedAt:
+                    data_name: v.updatedAt
+            default:
+                updatedAt: DESC
+        filters:
+            columns:
+                code:
+                    type: string
+                    data_name: v.code
+                createdAt:
+                    type: date
+                    data_name: v.createdAt
+                updatedAt:
+                    type: date
+                    data_name: v.updatedAt
+        actions:
+            view:
+                type:          navigate
+                label:         View
+                link:          view_link
+                icon:          eye-open
+                acl_resource:  issue_view
+                rowAction:     true
+            update:
+                type:          navigate
+                label:         Update
+                link:          update_link
+                icon:          edit
+                acl_resource:  issue_update
+            delete:
+                type:          delete
+                label:         Delete
+                link:          delete_link
+                icon:          trash
+                acl_resource:  issue_delete
