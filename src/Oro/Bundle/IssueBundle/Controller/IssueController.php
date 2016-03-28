@@ -24,8 +24,10 @@ class IssueController extends Controller
      */
     public function indexAction()
     {
-        return array('gridName' => 'issue-grid');
-        //return array('message' => "This is a new Issue Bundle");
+        return [
+            'entity_class' =>'Oro\Bundle\IssueBundle\Entity\Issue' //$this->container->getParameter('oro_issue.issue.entity.class')
+        ];
+        //return array('gridName' => 'issue-grid');
 
     }
 
@@ -47,8 +49,13 @@ class IssueController extends Controller
 
 
     /**
-     * @Route("/update", name="issue_update")
      * @Route("/update/{id}", name="issue_update", requirements={"id":"\d+"}, defaults={"id":0})
+     * @Acl(
+     *      id="oro_issue_update",
+     *      type="entity",
+     *      class="OroIssueBundle:Issue",
+     *      permission="EDIT"
+     * )
      * @Template()
      */
     public function updateAction(Issue $issue, Request $request)
@@ -58,6 +65,12 @@ class IssueController extends Controller
 
     /**
      * @Route("/{id}", name="issue_view", requirements={"id"="\d+"})
+     * @Acl(
+     *      id="oro_issue_view",
+     *      type="entity",
+     *      class="OroIssueBundle:Issue",
+     *      permission="VIEW"
+     * )
      * @Template
      */
     public function viewAction(Issue $issue)

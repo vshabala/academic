@@ -1,5 +1,6 @@
 datagrid:
     issue-grid:
+        extended_entity_name: Oro\Bundle\IssueBundle\Entity\Issue
         source:
             type: orm
             query:
@@ -17,6 +18,8 @@ datagrid:
                     left:
                         - { join: v.reporter, alias: rep }
                         - { join: v.assignee, alias: ass }
+        inline_editing:
+            enable: true
         columns:
             code:
                 label: Code
@@ -82,17 +85,17 @@ datagrid:
                 label:         View
                 link:          view_link
                 icon:          eye-open
-                acl_resource:  issue_view
+                acl_resource:  oro_issue_view
                 rowAction:     true
             update:
                 type:          navigate
                 label:         Update
                 link:          update_link
                 icon:          edit
-                acl_resource:  issue_update
+                acl_resource:  oro_issue_update
             delete:
                 type:          delete
                 label:         Delete
                 link:          delete_link
                 icon:          trash
-                acl_resource:  issue_delete
+                acl_resource:  oro_issue_delete

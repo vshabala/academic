@@ -2,6 +2,7 @@
 
 namespace Oro\Bundle\IssueBundle\Entity;
 
+
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -24,7 +25,17 @@ use Oro\Bundle\WorkflowBundle\Entity\WorkflowStep;
  *     defaultValues={
  *      "workflow"={
  *          "active_workflow"="issue_flow"
- *      }
+ *      },
+ *      "dataaudit"={
+ *              "auditable"=true
+ *          },
+ *      "tag"={
+ *              "enabled"=true
+ *          },
+ *      "security"={
+ *              "type"="ACL",
+ *              "permissions"="All"
+ *          }
  *     }
  *     )
  *
