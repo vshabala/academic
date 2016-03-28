@@ -97,5 +97,5 @@ datagrid:
                 type:          delete
                 label:         Delete
                 link:          delete_link
-                icon:          trash
+                icon:          remove
                 acl_resource:  oro_issue_delete

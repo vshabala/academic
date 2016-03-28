@@ -81,6 +81,12 @@ class IssueController extends Controller
 
     /**
      * @Route("/delete", name="issue_delete")
+     * @Acl(
+     *      id="oro_issue_delete",
+     *      type="entity",
+     *      class="OroIssueBundle:Issue",
+     *      permission="DELETE"
+     * )
      * @Template()
      */
     public function deleteAction()
