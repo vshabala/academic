@@ -16,7 +16,7 @@ class IssueType extends AbstractType
         $builder
             ->add('summary', 'text', array('label' => 'oro.issue.form.summary.label'))
             ->add('code', 'text', array('label' => 'oro.issue.form.code.label', 'required' => true))
-            ->add('description', 'oro_resizeable_rich_text', array('label' => 'oro.issue.form.description.label'))
+            ->add('description', 'textarea', array('label' => 'oro.issue.form.description.label'))
             ->add('reporter', 'oro_user_select', ['label' => 'oro.issue.form.reporter.label'])
             ->add('assignee', 'oro_user_select', ['label' => 'oro.issue.form.assignee.label'])
            // ->add('tags', 'oro_tag_entity_tags_selector', ['label' => 'oro.issue.summary.label'])
