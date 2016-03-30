@@ -123,6 +123,36 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      * @ORM\JoinColumn(name="workflow_step_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $workflowStep;
+
+    /**
+     * @var IssuePriority
+     *
+     * @ORM\ManyToOne(targetEntity="IssuePriority")
+     * @ORM\JoinColumn(name="issue_priority_name", referencedColumnName="name", onDelete="SET NULL")
+     * @ConfigField(
+     *      defaultValues={
+     *          "dataaudit"={
+     *              "auditable"=true
+     *          }
+     *      }
+     * )
+     */
+    protected $issuePriority;
+
+    /**
+     * @var IssueResolution
+     *
+     * @ORM\ManyToOne(targetEntity="IssueResolution")
+     * @ORM\JoinColumn(name="issue_resolution_name", referencedColumnName="name", onDelete="SET NULL")
+     * @ConfigField(
+     *      defaultValues={
+     *          "dataaudit"={
+     *              "auditable"=true
+     *          }
+     *      }
+     * )
+     */
+    protected $issueResolution;
     
 
     /**
@@ -347,5 +377,53 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     public function getWorkflowItem()
     {
         return $this->workflowItem;
+    }
+
+    /**
+     * Set issuePriority
+     *
+     * @param \Oro\Bundle\IssueBundle\Entity\IssuePriority $issuePriority
+     *
+     * @return Issue
+     */
+    public function setIssuePriority(\Oro\Bundle\IssueBundle\Entity\IssuePriority $issuePriority = null)
+    {
+        $this->issuePriority = $issuePriority;
+
+        return $this;
+    }
+
+    /**
+     * Get issuePriority
+     *
+     * @return \Oro\Bundle\IssueBundle\Entity\IssuePriority
+     */
+    public function getIssuePriority()
+    {
+        return $this->issuePriority;
+    }
+
+    /**
+     * Set issueResolution
+     *
+     * @param \Oro\Bundle\IssueBundle\Entity\IssueResolution $issueResolution
+     *
+     * @return Issue
+     */
+    public function setIssueResolution(\Oro\Bundle\IssueBundle\Entity\IssueResolution $issueResolution = null)
+    {
+        $this->issueResolution = $issueResolution;
+
+        return $this;
+    }
+
+    /**
+     * Get issueResolution
+     *
+     * @return \Oro\Bundle\IssueBundle\Entity\IssueResolution
+     */
+    public function getIssueResolution()
+    {
+        return $this->issueResolution;
     }
 }

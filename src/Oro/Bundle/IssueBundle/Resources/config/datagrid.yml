@@ -10,6 +10,10 @@ datagrid:
                     - v.summary
                     - CONCAT(rep.firstName, CONCAT(' ', rep.lastName)) as reporterName
                     - CONCAT(ass.firstName, CONCAT(' ', ass.lastName)) as assigneeName
+                    - ip.name as issuePriority
+                    - ip.label as priorityLabel
+                    - ir.name as issueResolution
+                    - ir.label as ResolutionLabel
                     - v.createdAt
                     - v.updatedAt
                 from:
@@ -18,6 +22,8 @@ datagrid:
                     left:
                         - { join: v.reporter, alias: rep }
                         - { join: v.assignee, alias: ass }
+                        - { join: v.issuePriority, alias: ip }
+                        - { join: v.issueResolution, alias: ir }
         inline_editing:
             enable: true
         columns:
@@ -25,6 +31,12 @@ datagrid:
                 label: Code
             summary:
                 label: Summary
+            issuePriority:
+                label: Priority
+                frontend_type: select
+            issueResolution:
+                label: Resolution
+                frontend_type: select
             reporterName:
                 label: Reporter
             assigneeName:
@@ -58,6 +70,10 @@ datagrid:
                     data_name: v.code
                 summary:
                     data_name: v.summary
+                issuePriority:
+                    data_name: ip.order
+                issueResolution:
+                    data_name: ir.order
                 reporterName:
                     data_name: reporterName
                 assigneeName:

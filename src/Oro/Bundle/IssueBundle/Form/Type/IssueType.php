@@ -2,6 +2,7 @@
 
 namespace Oro\Bundle\IssueBundle\Form\Type;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -21,6 +22,34 @@ class IssueType extends AbstractType
             ->add('assignee', 'oro_user_select', ['label' => 'oro.issue.form.assignee.label'])
            // ->add('tags', 'oro_tag_entity_tags_selector', ['label' => 'oro.issue.summary.label'])
             ->add('save', 'submit', array('label' => 'Create Issue'));
+
+        $builder
+            ->add(
+                'issuePriority',
+                'translatable_entity',
+                [
+                    'label' => 'oro.issue.form.issue_priority.label',
+                    'class' => 'Oro\Bundle\IssueBundle\Entity\IssuePriority',
+                    'required' => true,
+                    'query_builder' => function (EntityRepository $repository) {
+                        return $repository->createQueryBuilder('priority')->orderBy('priority.order');
+                    }
+                ]
+            );
+
+        $builder
+            ->add(
+                'issueResolution',
+                'translatable_entity',
+                [
+                    'label' => 'oro.issue.form.issue_resolution.label',
+                    'class' => 'Oro\Bundle\IssueBundle\Entity\IssueResolution',
+                    'required' => true,
+                    'query_builder' => function (EntityRepository $repository) {
+                        return $repository->createQueryBuilder('resolution')->orderBy('resolution.order');
+                    }
+                ]
+            );
     }
 
     /**
