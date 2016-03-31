@@ -10,6 +10,17 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class IssueType extends AbstractType
 {
     /**
+     * @var array
+     */
+    private $issueTypes;
+
+    public function __construct(array $issueTypes)
+    {
+        $this->issueTypes = $issueTypes;
+    }
+
+
+    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -25,6 +36,16 @@ class IssueType extends AbstractType
 
         $builder
             ->add(
+                'issueType', 'choice',
+                [
+                    'multiple' => false,
+                    'label' => 'oro.issue.form.type.label',
+                    'choices' => $this->issueTypes,
+                ]
+            );
+
+        $builder
+            ->add(
                 'issuePriority',
                 'translatable_entity',
                 [
@@ -36,6 +57,7 @@ class IssueType extends AbstractType
                     }
                 ]
             );
+
 
         $builder
             ->add(
@@ -60,9 +82,9 @@ class IssueType extends AbstractType
         $resolver->setDefaults(
             array(
                 'data_class' => 'Oro\Bundle\IssueBundle\Entity\Issue',
-               // 'intention'  => 'issue',
+
                 'ownership_disabled'      => true,
-               // 'organization_disabled'      => true,
+
             )
         );
     }

@@ -8,6 +8,7 @@ datagrid:
                     - v.id
                     - v.code
                     - v.summary
+                    - v.issueType
                     - CONCAT(rep.firstName, CONCAT(' ', rep.lastName)) as reporterName
                     - CONCAT(ass.firstName, CONCAT(' ', ass.lastName)) as assigneeName
                     - ip.name as issuePriority
@@ -31,6 +32,8 @@ datagrid:
                 label: Code
             summary:
                 label: Summary
+            issueType:
+                label: Type
             issuePriority:
                 label: Priority
                 frontend_type: select
@@ -70,6 +73,8 @@ datagrid:
                     data_name: v.code
                 summary:
                     data_name: v.summary
+                issueType:
+                    data_name: v.issue
                 issuePriority:
                     data_name: ip.order
                 issueResolution:

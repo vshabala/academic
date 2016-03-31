@@ -17,6 +17,7 @@ use Oro\Bundle\EntityBundle\EntityProperty\DatesAwareInterface;
 use Oro\Bundle\EntityBundle\EntityProperty\DatesAwareTrait;
 use Oro\Bundle\WorkflowBundle\Entity\WorkflowItem;
 use Oro\Bundle\WorkflowBundle\Entity\WorkflowStep;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="Oro\Bundle\IssueBundle\Entity\Repository\IssueRepository")
@@ -125,6 +126,22 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     protected $workflowStep;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="issue_type", type="string", length=32, nullable=false)
+     * @Assert\NotBlank()
+     * @Assert\Regex("/^(Bug|Task|Subtask|Story)/")
+     * @ConfigField(
+     *      defaultValues={
+     *          "dataaudit"={
+     *              "auditable"=true
+     *          }
+     *      }
+     * )
+     */
+    protected $issueType;
+
+    /**
      * @var IssuePriority
      *
      * @ORM\ManyToOne(targetEntity="IssuePriority")
@@ -153,8 +170,9 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      * )
      */
     protected $issueResolution;
-    
 
+
+ 
     /**
      * Get id
      *
@@ -425,5 +443,33 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     public function getIssueResolution()
     {
         return $this->issueResolution;
+    }
+
+
+
+
+
+    /**
+     * Set issueType
+     *
+     * @param string $issueType
+     *
+     * @return Issue
+     */
+    public function setIssueType($issueType)
+    {
+        $this->issueType = $issueType;
+
+        return $this;
+    }
+
+    /**
+     * Get issueType
+     *
+     * @return string
+     */
+    public function getIssueType()
+    {
+        return $this->issueType;
     }
 }

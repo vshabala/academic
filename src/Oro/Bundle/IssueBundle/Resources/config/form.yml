@@ -20,5 +20,6 @@ services:
 
     oro_issue.form.type.issue:
         class: %oro_issue.issue.form.type.issue.class%
+        arguments: ['%oro_issue.issue_types%']
         tags:
             - { name: form.type, alias: oro_issue_issue }

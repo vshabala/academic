@@ -6,6 +6,7 @@ oro:
             code.label: "Code"
             summary.label: "Summary"
             description.label: "Description"
+            type.label: "Type"
             reporter.label: "Reporter"
             assignee.label: "Assignee"
             workflowStep.label: "Workflow Step"
@@ -25,5 +26,9 @@ oro:
             label.label: Label
             name.label: Name
             order.label: Order
+
+
+
+
 
 

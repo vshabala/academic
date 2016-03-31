@@ -4,6 +4,12 @@ parameters:
     oro_issue.issue.manager.api.class:  Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager
     orocrm_issue.subscriber.issue_listener.class: Oro\Bundle\IssueBundle\EventListener\IssueListener
 
+    oro_issue.issue_types:
+        Bug: Bug1
+        Task: Task
+        Subtask: Subtask
+        Story: Story
+
 services:
     oro_issue.issue.manager:
         class: %oro_issue.issue.manager.class%
@@ -23,5 +29,6 @@ services:
                 - @service_container
             tags:
                 - { name: doctrine.event_listener, event: postPersist }
+
 
 
