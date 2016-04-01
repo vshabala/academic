@@ -1,5 +1,6 @@
 {% extends 'OroUIBundle:actions:view.html.twig' %}
 {% import 'OroUIBundle::macros.html.twig' as UI %}
+{% import 'OroDataGridBundle::macros.html.twig' as dataGrid %}
 
 {% block navButtons %}
     {% if resource_granted('EDIT', entity) %}
@@ -17,6 +18,12 @@
             'id': 'btn-remove-issue',
             'dataId': entity.id,
             'entity_label': 'Issue'|trans,
+        }) }}
+    {% endif %}
+    {% if resource_granted('EDIT', entity) and entity.issueType == 'Story' %}
+        {{ UI.button({
+            'path' : path('issue_create', { parent: entity.id }),
+            'label': 'Subtask'|trans
         }) }}
     {% endif %}
 {% endblock navButtons %}
@@ -46,6 +53,9 @@
                     {{ UI.renderProperty('Assignee'|trans, entity.assignee) }}
                     {{ UI.renderProperty('Created at'|trans, entity.createdAt|oro_format_datetime) }}
                     {{ UI.renderProperty('Updated at'|trans, entity.updatedAt|oro_format_datetime) }}
+                    {% if entity.parent is not empty %}
+                        <a href="{{ path('issue_view', {'id': entity.parent.id}) }}">{{ UI.renderProperty('Parent'|trans, entity.parent.code) }}</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -59,6 +69,18 @@
     ]
     }
     ] %}
+    {% if entity.issueType == 'Story' %}
+        {% set dataBlocks = dataBlocks|merge([{
+        'title': 'Subtasks'|trans,
+        'subblocks': [{
+        'title': '',
+        'useSpan': false,
+        'data' : [
+        dataGrid.renderGrid('subtask-grid', {'parent_id': entity.id})
+        ]
+        }]
+        }] ) %}
+    {% endif %}
 
     {% set id = 'issueView' %}
     {% set data = { 'dataBlocks': dataBlocks } %}

@@ -87,6 +87,21 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     protected $summary;
 
     /**
+     * @var parent
+     *
+     * @ORM\ManyToOne(targetEntity="Issue", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+     */
+    protected $parent;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany( targetEntity="Issue", mappedBy="parent",  cascade={"ALL"}, fetch="EXTRA_LAZY")
+     */
+    protected $children;
+
+    /**
      * @var string $description
      *
      * @ORM\Column(name="description", type="text", nullable=true)
@@ -471,5 +486,63 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     public function getIssueType()
     {
         return $this->issueType;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \Oro\Bundle\IssueBundle\Entity\Issue $parent
+     *
+     * @return Issue
+     */
+    public function setParent(\Oro\Bundle\IssueBundle\Entity\Issue $parent)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \Oro\Bundle\IssueBundle\Entity\Issue
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * Add child
+     *
+     * @param \Oro\Bundle\IssueBundle\Entity\Issue $child
+     *
+     * @return Issue
+     */
+    public function addChild(\Oro\Bundle\IssueBundle\Entity\Issue $child)
+    {
+        $this->children[] = $child;
+
+        return $this;
+    }
+
+    /**
+     * Remove child
+     *
+     * @param \Oro\Bundle\IssueBundle\Entity\Issue $child
+     */
+    public function removeChild(\Oro\Bundle\IssueBundle\Entity\Issue $child)
+    {
+        $this->children->removeElement($child);
+    }
+
+    /**
+     * Get children
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getChildren()
+    {
+        return $this->children;
     }
 }

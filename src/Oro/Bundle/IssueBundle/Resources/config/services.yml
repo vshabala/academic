@@ -5,7 +5,7 @@ parameters:
     orocrm_issue.subscriber.issue_listener.class: Oro\Bundle\IssueBundle\EventListener\IssueListener
 
     oro_issue.issue_types:
-        Bug: Bug1
+        Bug: Bug
         Task: Task
         Subtask: Subtask
         Story: Story

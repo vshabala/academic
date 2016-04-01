@@ -45,7 +45,23 @@ class IssueController extends Controller
      */
     public function createAction(Request $request)
     {
-        return $this->update(new Issue(), $request);
+        $issue = new Issue();
+        $issue->setReporter($this->getUser());
+
+        $parentId = $request->query->getInt('parent');
+
+        if ($parentId)
+            $parent = $this
+                ->getDoctrine()
+                ->getRepository('OroIssueBundle:Issue')
+                 ->findOneBy(['id' => $parentId, 'issueType' => 'Story']);
+
+        if (isset($parent)){
+            $issue->setParent($parent);
+            $issue->setIssueType('Subtask');
+        }
+        
+        return $this->update($issue, $request);
     }
 
 

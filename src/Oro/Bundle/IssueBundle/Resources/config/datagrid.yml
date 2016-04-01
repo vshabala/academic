@@ -120,3 +120,16 @@ datagrid:
                 link:          delete_link
                 icon:          remove
                 acl_resource:  oro_issue_delete
+    subtask-grid:
+        extends: issue-grid
+        source:
+              query:
+                  where:
+                        and:
+                            - v.parent = :parent_id
+              bind_parameters:
+                      - parent_id
+        filters: ~
+        options:
+            toolbarOptions:
+                hide: true
