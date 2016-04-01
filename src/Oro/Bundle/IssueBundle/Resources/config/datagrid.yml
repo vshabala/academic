@@ -123,12 +123,25 @@ datagrid:
     subtask-grid:
         extends: issue-grid
         source:
-              query:
-                  where:
-                        and:
-                            - v.parent = :parent_id
-              bind_parameters:
-                      - parent_id
+            query:
+                where:
+                    and:
+                        - v.parent = :parent_id
+            bind_parameters:
+                - parent_id
+        filters: ~
+        options:
+            toolbarOptions:
+                hide: true
+    collaborator-grid:
+        extends: users-grid
+        source:
+            query:
+                where:
+                    and:
+                        - u.id IN (:ids)
+            bind_parameters:
+                - ids
         filters: ~
         options:
             toolbarOptions:

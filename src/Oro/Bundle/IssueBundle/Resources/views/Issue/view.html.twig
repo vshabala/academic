@@ -1,6 +1,7 @@
 {% extends 'OroUIBundle:actions:view.html.twig' %}
 {% import 'OroUIBundle::macros.html.twig' as UI %}
 {% import 'OroDataGridBundle::macros.html.twig' as dataGrid %}
+{% import 'OroUserBundle::macros.html.twig' as U %}
 
 {% block navButtons %}
     {% if resource_granted('EDIT', entity) %}
@@ -69,6 +70,18 @@
     ]
     }
     ] %}
+    {% if entity.collaborators is not null %}
+        {% set dataBlocks = dataBlocks|merge([{
+        'title': 'Collaborators'|trans,
+        'subblocks': [{
+        'title': '',
+        'useSpan': false,
+        'data' : [
+        dataGrid.renderGrid('collaborator-grid', {'ids': entity.collaborators})
+        ]
+        }]
+        }] ) %}
+    {% endif %}
     {% if entity.issueType == 'Story' %}
         {% set dataBlocks = dataBlocks|merge([{
         'title': 'Subtasks'|trans,

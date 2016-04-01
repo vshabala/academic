@@ -186,8 +186,25 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      */
     protected $issueResolution;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Oro\Bundle\UserBundle\Entity\User")
+     * @ORM\JoinTable(name="oro_issue_collaborator",
+     *      joinColumns={@ORM\JoinColumn(name="issue_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}
+     *      )
+     */
+    protected $collaborators;
 
- 
+    /**
+     * Issue constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->collaborators = new ArrayCollection();
+        $this->children = new ArrayCollection();
+    }
+
     /**
      * Get id
      *
@@ -544,5 +561,49 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     public function getChildren()
     {
         return $this->children;
+    }
+
+    /**
+     * Add collaborator
+     *
+     * @param \Oro\Bundle\UserBundle\Entity\User $collaborator
+     *
+     * @return Issue
+     */
+    public function addCollaborator(\Oro\Bundle\UserBundle\Entity\User $collaborator)
+    {
+        if (!$this->collaborators->contains($collaborator)) {
+            $this->collaborators->add($collaborator);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove collaborator
+     *
+     * @param \Oro\Bundle\UserBundle\Entity\User $collaborator
+     */
+    public function removeCollaborator(\Oro\Bundle\UserBundle\Entity\User $collaborator)
+    {
+        $this->collaborators->removeElement($collaborator);
+    }
+
+    /**
+     * Get collaborators
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCollaborators()
+    {
+        return $this->collaborators;
+    }
+
+    /**
+     * @return string
+     */
+    public function getClass()
+    {
+        return __CLASS__;
     }
 }

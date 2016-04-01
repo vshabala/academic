@@ -103,8 +103,11 @@ class IssueController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+
+
             $entityManager->persist($issue);
             $entityManager->flush();
+
 
             return $this->get('oro_ui.router')->redirectAfterSave(
                 array(
