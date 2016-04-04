@@ -572,6 +572,7 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      */
     public function addCollaborator(\Oro\Bundle\UserBundle\Entity\User $collaborator)
     {
+
         if (!$this->collaborators->contains($collaborator)) {
             $this->collaborators->add($collaborator);
         }

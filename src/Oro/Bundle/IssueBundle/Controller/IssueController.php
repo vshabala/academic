@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
+
 class IssueController extends Controller
 {
     /**
@@ -47,6 +48,7 @@ class IssueController extends Controller
     {
         $issue = new Issue();
         $issue->setReporter($this->getUser());
+        $issue->setAssignee($this->getUser());
 
         $parentId = $request->query->getInt('parent');
 

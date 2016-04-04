@@ -13,3 +13,5 @@ interface IssueHandlerInterface
      */
     public function setTagManager(TagManager $tagManager);
 }
+
+
