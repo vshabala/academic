@@ -120,6 +120,20 @@ datagrid:
                 link:          delete_link
                 icon:          remove
                 acl_resource:  oro_issue_delete
+    issue_user_grid:
+        extends: issue-grid
+        source:
+            query:
+                where:
+                    or:
+                        - v.reporter = :user_id
+                        - v.assignee = :user_id
+            bind_parameters:
+                - user_id
+        filters: ~
+        options:
+            toolbarOptions:
+                hide: true
     subtask-grid:
         extends: issue-grid
         source:

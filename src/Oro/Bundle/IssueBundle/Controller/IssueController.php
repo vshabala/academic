@@ -26,13 +26,47 @@ class IssueController extends Controller
     public function indexAction()
     {
         return [
-           // 'entity_class' =>'Oro\Bundle\IssueBundle\Entity\Issue'
-            $this->container->getParameter('oro_issue.issue.entity.class')
+
+            'entity_class' => $this->container->getParameter('oro_issue.issue.entity.class')
         ];
-        //return array('gridName' => 'issue-grid');
+
 
     }
 
+    /**
+     * @Route("/user/{userId}", name="oro_issue_user_issues", requirements={"userId"="\d+"})
+     * @AclAncestor("oro_issue_view")
+     * @Template("OroIssueBundle:Issue:widget/userIssues.html.twig")
+     */
+    public function userIssuesAction($userId)
+    {
+        return array('userId' => $userId);
+        /** @var TaskRepository $repository */
+        $repository = $this->getDoctrine()->getRepository('Oro\Bundle\IssueBundle\Entity\Issue');
+        $issues = $repository->getIssuesOfUser($userId);
+        return array('issues' => $issues);
+    }
+
+
+
+    /**
+     * @Route(
+     *      "/view/widget/{entityClass}/{entityId}",
+     *      name="oro_issue_widget_issues"
+     * )
+     *
+     * @AclAncestor("oro_issue_view")
+     * @Template("OroIssueBundle:Issue:issues.html.twig")
+     */
+    public function widgetAction($entityClass, $entityId)
+    {
+        $entity = $this->getEntityRoutingHelper()->getEntity($entityClass, $entityId);
+
+        return [
+            'entity' => $entity
+        ];
+
+    }
 
     /**
      * @Route("/create", name="issue_create")
@@ -126,4 +160,13 @@ class IssueController extends Controller
             'form' => $form->createView(),
         );
     }
+
+    /**
+     * @return EntityRoutingHelper
+     */
+    protected function getEntityRoutingHelper()
+    {
+        return $this->get('oro_entity.routing_helper');
+    }
+
 }

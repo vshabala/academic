@@ -1,0 +1,24 @@
+{% import 'OroUIBundle::macros.html.twig' as UI %}
+{{ UI.clientButton({
+    'dataUrl': path('issue_create'),
+    'aCss': 'no-hash btn-primary',
+    'dataId': entity.id,
+    'label': 'Create Issue'|trans,
+    'title': 'Create Issue'|trans,
+    'widget' : {
+        'type' : 'dialog',
+        'multiple' : false,
+        'refresh-widget-alias': 'activity-list-widget',
+        'options' : {
+            'alias': 'task-dialog',
+            'dialogOptions' : {
+                'title' : 'Create Issue'|trans,
+                'allowMaximize': true,
+                'allowMinimize': true,
+                'dblclick': 'maximize',
+                'maximizedHeightDecreaseBy': 'minimize-bar',
+                'width': 1000
+            }
+        }
+    }
+}) }}
