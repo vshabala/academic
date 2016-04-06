@@ -30,9 +30,7 @@ class IssueType extends AbstractType
             ->add('code', 'text', array('label' => 'oro.issue.form.code.label', 'required' => true))
             ->add('description', 'textarea', array('label' => 'oro.issue.form.description.label'))
             ->add('reporter', 'oro_user_select', ['label' => 'oro.issue.form.reporter.label'])
-            ->add('assignee', 'oro_user_select', ['label' => 'oro.issue.form.assignee.label'])
-           // ->add('tags', 'oro_tag_entity_tags_selector', ['label' => 'oro.issue.summary.label'])
-            ->add('save', 'submit', array('label' => 'Create Issue'));
+            ->add('assignee', 'oro_user_select', ['label' => 'oro.issue.form.assignee.label']);
 
         $builder
             ->add(
@@ -57,8 +55,7 @@ class IssueType extends AbstractType
                     }
                 ]
             );
-
-
+        
         $builder
             ->add(
                 'issueResolution',

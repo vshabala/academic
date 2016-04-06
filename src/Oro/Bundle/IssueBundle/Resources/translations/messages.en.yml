@@ -26,6 +26,7 @@ oro:
             label.label: Label
             name.label: Name
             order.label: Order
+        saved_message: The issue is saved
 
 
 

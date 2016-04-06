@@ -1,6 +1,6 @@
 {% import 'OroUIBundle::macros.html.twig' as UI %}
 {{ UI.clientButton({
-    'dataUrl': path('issue_create'),
+    'dataUrl': path('issue_create', {'userid': entity.id}),
     'aCss': 'no-hash btn-primary',
     'dataId': entity.id,
     'label': 'Create Issue'|trans,

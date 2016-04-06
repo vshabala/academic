@@ -10,16 +10,16 @@ namespace Oro\Bundle\IssueBundle\Entity\Repository;
  */
 class IssueRepository extends \Doctrine\ORM\EntityRepository
 {
-
+    /*
     public function getIssuesOfUser($userId)
     {
         return $this->createQueryBuilder('issue')
             ->where('issue.reporter = :userId OR issue.assignee = :userId')
             ->orderBy('issue.createdAt', 'DESC')
             ->setFirstResult(0)
-          //  ->setMaxResults($limit)
             ->setParameter('userId', $userId)
             ->getQuery()
             ->execute();
     }
+    */
 }

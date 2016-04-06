@@ -29,11 +29,12 @@ class IssueController extends Controller
 
             'entity_class' => $this->container->getParameter('oro_issue.issue.entity.class')
         ];
-
-
+        
     }
 
     /**
+     * @var int $userId
+     *
      * @Route("/user/{userId}", name="oro_issue_user_issues", requirements={"userId"="\d+"})
      * @AclAncestor("oro_issue_view")
      * @Template("OroIssueBundle:Issue:widget/userIssues.html.twig")
@@ -41,34 +42,10 @@ class IssueController extends Controller
     public function userIssuesAction($userId)
     {
         return array('userId' => $userId);
-        /** @var TaskRepository $repository */
-        $repository = $this->getDoctrine()->getRepository('Oro\Bundle\IssueBundle\Entity\Issue');
-        $issues = $repository->getIssuesOfUser($userId);
-        return array('issues' => $issues);
-    }
-
-
-
-    /**
-     * @Route(
-     *      "/view/widget/{entityClass}/{entityId}",
-     *      name="oro_issue_widget_issues"
-     * )
-     *
-     * @AclAncestor("oro_issue_view")
-     * @Template("OroIssueBundle:Issue:issues.html.twig")
-     */
-    public function widgetAction($entityClass, $entityId)
-    {
-        $entity = $this->getEntityRoutingHelper()->getEntity($entityClass, $entityId);
-
-        return [
-            'entity' => $entity
-        ];
-
     }
 
     /**
+     * @return array
      * @Route("/create", name="issue_create")
      * @Acl(
      *      id="oro_issue_create",
@@ -82,26 +59,41 @@ class IssueController extends Controller
     {
         $issue = new Issue();
         $issue->setReporter($this->getUser());
-        $issue->setAssignee($this->getUser());
 
         $parentId = $request->query->getInt('parent');
-
         if ($parentId)
             $parent = $this
                 ->getDoctrine()
                 ->getRepository('OroIssueBundle:Issue')
-                 ->findOneBy(['id' => $parentId, 'issueType' => 'Story']);
-
+                ->findOneBy(['id' => $parentId, 'issueType' => 'Story']);
         if (isset($parent)){
             $issue->setParent($parent);
             $issue->setIssueType('Subtask');
         }
-        
-        return $this->update($issue, $request);
+
+        $userId = $request->query->getInt('userid');
+        if ($userId)
+            $user = $this
+                ->getDoctrine()
+                ->getRepository('OroUserBundle:User')
+                ->findOneBy(['id' => $userId]);
+        if (isset($user)){
+            $issue->setAssignee($user);
+        }
+        else {
+            $issue->setAssignee($this->getUser());
+        }
+
+        $formAction = $this->get('oro_entity.routing_helper')
+            ->generateUrlByRequest('issue_create', $this->getRequest());
+
+        return $this->update($issue, $formAction);
+
     }
 
-
     /**
+     * @param Issue $issue
+     * @return array
      * @Route("/update/{id}", name="issue_update", requirements={"id":"\d+"}, defaults={"id":0})
      * @Acl(
      *      id="oro_issue_update",
@@ -113,10 +105,14 @@ class IssueController extends Controller
      */
     public function updateAction(Issue $issue, Request $request)
     {
-        return $this->update($issue, $request);
+        $formAction = $this->get('router')->generate('issue_update', ['id' => $issue->getId()]);
+        return $this->update($issue, $formAction);
     }
 
     /**
+     * @param Issue $issue
+     * @return array
+     *
      * @Route("/{id}", name="issue_view", requirements={"id"="\d+"})
      * @Acl(
      *      id="oro_issue_view",
@@ -130,34 +126,39 @@ class IssueController extends Controller
     {
         return array('entity' => $issue);
     }
-    
-    private function update(Issue $issue, Request $request)
+
+    /**
+     * @param Issue $issue
+     * @param $formAction
+     * @return array
+     */
+    private function update(Issue $issue, $formAction)
     {
-        $form = $this->get('form.factory')->create('oro_issue_issue', $issue);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-
-
-            $entityManager->persist($issue);
-            $entityManager->flush();
-
-
-            return $this->get('oro_ui.router')->redirectAfterSave(
-                array(
-                    'route' => 'issue_index',
-                   // 'parameters' => array('id' => $issue->getId()),
-                ),
-                array('route' => 'issue_index'),
-                $issue
-            );
+        $saved = false;
+        if ($this->get('oro_issue.form.handler.issue')->process($issue)) {
+            if (!$this->get('request_stack')->getCurrentRequest()->get('_widgetContainer')) {
+                $this->get('session')->getFlashBag()->add(
+                    'success',
+                    $this->get('translator')->trans('oro.issue.saved_message')
+                );
+                return $this->get('oro_ui.router')->redirectAfterSave(
+                    array(
+                        'route' => 'issue_update',
+                        'parameters' => array('id' => $issue->getId()),
+                    ),
+                    array(
+                        'route' => 'issue_view',
+                        'parameters' => array('id' => $issue->getId()),
+                    )
+                );
+            }
+            $saved = true;
         }
-
         return array(
-            'entity' => $issue,
-            'form' => $form->createView(),
+            'entity'     => $issue,
+            'saved'      => $saved,
+            'form'       => $this->get('oro_issue.form.handler.issue')->getForm()->createView(),
+            'formAction' => $formAction,
         );
     }
 

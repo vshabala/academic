@@ -63,6 +63,17 @@ class IssueHandler
 
         return false;
     }
+
+    /**
+     * Get form, that build into handler, via handler service
+     *
+     * @return FormInterface
+     */
+    public function getForm()
+    {
+        return $this->form;
+    }
+    
 }
 
 
