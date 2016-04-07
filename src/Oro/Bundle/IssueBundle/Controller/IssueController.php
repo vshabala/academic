@@ -33,22 +33,6 @@ class IssueController extends Controller
     }
 
     /**
-     * @var int $userId
-     * @return array
-     * @Route("/user/{userId}", name="oro_issue_user_issues", requirements={"userId"="\d+"})
-     * @AclAncestor("oro_issue_view")
-     * @Template("OroIssueBundle:Issue:userIssues.html.twig")
-     */
-    public function userIssuesAction($userId)
-    {
-        return [
-            'userId' => $userId,
-            'entity_class' => $this->container->getParameter('oro_issue.issue.entity.class')
-        ] ;
-
-    }
-
-    /**
      * @return array
      * @Route("/create", name="issue_create")
      * @Acl(
@@ -113,7 +97,59 @@ class IssueController extends Controller
         return $this->update($issue, $formAction);
     }
 
- 
+    /**
+     * @param Issue $issue
+     * @return array
+     *
+     * @Route("/{id}", name="issue_view", requirements={"id"="\d+"})
+     * @Acl(
+     *      id="oro_issue_view",
+     *      type="entity",
+     *      class="OroIssueBundle:Issue",
+     *      permission="VIEW"
+     * )
+     * @Template
+     */
+    public function viewAction(Issue $issue)
+    {
+        return array('entity' => $issue);
+    }
+
+
+    /**
+     * @return array
+     *
+     * @Route("/chart/status", name="issue_status_chart")
+     * @Acl(
+     *      id="oro_issue_view",
+     *      type="entity",
+     *      class="OroIssueBundle:Issue",
+     *      permission="VIEW"
+     * )
+     * @Template("OroIssueBundle:Dashboard:issueStatus.html.twig")
+     */
+    public function statusChartAction()
+    {
+        $manager = $this->getDoctrine()->getManager();
+        $items  = $manager->getRepository('OroIssueBundle:Issue')->countIssuesPerStatus();
+
+        $widgetAttr = $this->get('oro_dashboard.widget_configs')->getWidgetAttributesForTwig('issue_status');
+        $widgetAttr['chartView']= $this->get('oro_chart.view_builder')
+            ->setArrayData($items)
+            ->setOptions(
+                array(
+                    'name' => 'bar_chart',
+                    'data_schema' => array(
+                        'label' => array('field_name' => 'label'),
+                        'value' => array('field_name' => 'number')
+                    ),
+                    'settings' => array('xNoTicks' => count($items)),
+                )
+            )
+            ->getView();
+        return $widgetAttr;
+
+    }
 
     /**
      *
@@ -131,22 +167,21 @@ class IssueController extends Controller
         return ['widgetName' => 'Your Issue', 'userId'=>$this->getUser()->getId()];
 
     }
+
     /**
-     * @param Issue $issue
+     * @var int $userId
      * @return array
-     *
-     * @Route("/{id}", name="issue_view", requirements={"id"="\d+"})
-     * @Acl(
-     *      id="oro_issue_view",
-     *      type="entity",
-     *      class="OroIssueBundle:Issue",
-     *      permission="VIEW"
-     * )
-     * @Template
+     * @Route("/user/{userId}", name="oro_issue_user_issues", requirements={"userId"="\d+"})
+     * @AclAncestor("oro_issue_view")
+     * @Template("OroIssueBundle:Issue:userIssues.html.twig")
      */
-    public function viewAction(Issue $issue)
+    public function userIssuesAction($userId)
     {
-        return array('entity' => $issue);
+        return [
+            'userId' => $userId,
+            'entity_class' => $this->container->getParameter('oro_issue.issue.entity.class')
+        ] ;
+
     }
 
     /**

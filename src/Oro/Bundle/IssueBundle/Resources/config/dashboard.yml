@@ -1,5 +1,10 @@
 oro_dashboard_config:
     widgets:
+        issue_status:
+            label:       Issue By Status
+            route:       issue_status_chart
+            acl:         oro_issue_view
+            description: Issue By Status
         user_issue:
             label:      Your Issue
             route:      dashboard_issue
