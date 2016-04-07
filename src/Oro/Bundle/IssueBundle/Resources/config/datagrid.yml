@@ -160,3 +160,38 @@ datagrid:
         options:
             toolbarOptions:
                 hide: true
+    dashboard_user_grid:
+        extends: issue-grid
+        source:
+            query:
+                join:
+                    left:
+                        -
+                            join: v.collaborators
+                            alias: coll
+                        -
+                            join: v.workflowStep
+                            alias: ws
+                where:
+                    and:
+                        - coll.id = :userid
+                        - ws.label <> 'Closed'
+
+            bind_parameters:
+              - userid
+        filters: ~
+        options:
+            toolbarOptions:
+                hide: true
+                pageSize:
+                    items: [10]
+                    default_per_page: 10
+    dashboard_user_grid_full:
+        extends: dashboard_user_grid
+        source:
+            bind_parameters:
+              - userid
+        options:
+            toolbarOptions:
+                hide: false
+                pageSize: ~

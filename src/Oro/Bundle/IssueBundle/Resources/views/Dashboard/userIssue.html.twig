@@ -1,0 +1,16 @@
+{% extends 'OroDashboardBundle:Dashboard:widget.html.twig' %}
+{% import 'OroDataGridBundle::macros.html.twig' as dataGrid %}
+
+{% block content %}
+    {{ dataGrid.renderGrid('dashboard_user_grid',{'userid':userId}) }}
+{% endblock %}
+
+{% block actions %}
+    {% set actions = [{
+    'url': path('oro_issue_user_issues',{'userId':userId}),
+    'type': 'link',
+    'label': 'View All'
+    }] %}
+
+    {{ parent() }}
+{% endblock %}

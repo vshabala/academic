@@ -1,0 +1,6 @@
+oro_dashboard_config:
+    widgets:
+        user_issue:
+            label:      Your Issue
+            route:      dashboard_issue
+            acl:        oro_issue_view

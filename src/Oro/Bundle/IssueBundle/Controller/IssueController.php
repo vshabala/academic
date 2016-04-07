@@ -29,19 +29,23 @@ class IssueController extends Controller
 
             'entity_class' => $this->container->getParameter('oro_issue.issue.entity.class')
         ];
-        
+
     }
 
     /**
      * @var int $userId
-     *
+     * @return array
      * @Route("/user/{userId}", name="oro_issue_user_issues", requirements={"userId"="\d+"})
      * @AclAncestor("oro_issue_view")
-     * @Template("OroIssueBundle:Issue:widget/userIssues.html.twig")
+     * @Template("OroIssueBundle:Issue:userIssues.html.twig")
      */
     public function userIssuesAction($userId)
     {
-        return array('userId' => $userId);
+        return [
+            'userId' => $userId,
+            'entity_class' => $this->container->getParameter('oro_issue.issue.entity.class')
+        ] ;
+
     }
 
     /**
@@ -109,6 +113,24 @@ class IssueController extends Controller
         return $this->update($issue, $formAction);
     }
 
+ 
+
+    /**
+     *
+     * @Route("/dashboard/issue", name="dashboard_issue")
+     * @Acl(
+     *      id="oro_issue_view",
+     *      type="entity",
+     *      class="OroIssueBundle:Issue",
+     *      permission="VIEW"
+     * )
+     * @Template("OroIssueBundle:Dashboard:userIssue.html.twig")
+     */
+    public function userIssueAction()
+    {
+        return ['widgetName' => 'Your Issue', 'userId'=>$this->getUser()->getId()];
+
+    }
     /**
      * @param Issue $issue
      * @return array
