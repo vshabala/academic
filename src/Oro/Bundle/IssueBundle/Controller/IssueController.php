@@ -47,7 +47,6 @@ class IssueController extends Controller
     {
         $issue = new Issue();
         $issue->setReporter($this->getUser());
-
         $parentId = $request->query->getInt('parent');
         if ($parentId)
             $parent = $this
