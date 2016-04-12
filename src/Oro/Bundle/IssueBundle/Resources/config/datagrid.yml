@@ -147,6 +147,19 @@ datagrid:
         options:
             toolbarOptions:
                 hide: true
+    related-issues-grid:
+        extends: issue-grid
+        source:
+            query:
+                where:
+                    and:
+                        - v.id IN (:ids)
+            bind_parameters:
+                - ids
+        filters: ~
+        options:
+            toolbarOptions:
+                hide: true
     collaborator-grid:
         extends: users-grid
         source:

@@ -27,8 +27,10 @@ oro:
             name.label: Name
             order.label: Order
         saved_message: The issue is saved
+        related.label: Related Issue
         my_issues: My Issues
         nav_item: Issues
+
 
 
 

@@ -217,6 +217,15 @@ class Issue extends ExtendIssue implements DatesAwareInterface
         $this->children = new ArrayCollection();
     }
 
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getCode()." : ".$this->getSummary();
+    }
+
     /**
      * Get id
      *
@@ -687,4 +696,5 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     {
         return $this->issuesRelated;
     }
+
 }

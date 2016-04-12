@@ -69,6 +69,17 @@ class IssueType extends AbstractType
                     }
                 ]
             );
+        $builder
+            ->add(
+                'relatedIssues',
+                'translatable_entity',
+                [
+                    'label' => 'oro.issue.related.label',
+                    'class' => 'Oro\Bundle\IssueBundle\Entity\Issue',
+                    'multiple' => true,
+                    'required' => false
+                ]
+            );
     }
 
     /**

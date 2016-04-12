@@ -70,6 +70,19 @@
     ]
     }
     ] %}
+
+    {% if entity.relatedIssues is not null %}
+        {% set dataBlocks = dataBlocks|merge([{
+        'title': 'oro.issue.related.label'|trans,
+        'subblocks': [{
+        'title': '',
+        'useSpan': false,
+        'data' : [
+        dataGrid.renderGrid('related-issues-grid', {'ids': entity.relatedIssues})
+        ]
+        }]
+        }] ) %}
+    {% endif %}
     {% if entity.collaborators is not null %}
         {% set dataBlocks = dataBlocks|merge([{
         'title': 'Collaborators'|trans,
