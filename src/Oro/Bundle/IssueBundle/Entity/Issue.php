@@ -195,6 +195,18 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      */
     protected $collaborators;
 
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Issue", inversedBy="issuesRelated")
+     * @ORM\JoinTable(name="oro_issue_related")
+     **/
+    protected $relatedIssues;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Issue", mappedBy="relatedIssues")
+     */
+    protected $issuesRelated;
+
     /**
      * Issue constructor.
      */
@@ -606,5 +618,73 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     public function getClass()
     {
         return __CLASS__;
+    }
+
+    /**
+     * Add relatedIssue
+     *
+     * @param \Oro\Bundle\IssueBundle\Entity\Issue $relatedIssue
+     *
+     * @return Issue
+     */
+    public function addRelatedIssue(\Oro\Bundle\IssueBundle\Entity\Issue $relatedIssue)
+    {
+        $this->relatedIssues[] = $relatedIssue;
+
+        return $this;
+    }
+
+    /**
+     * Remove relatedIssue
+     *
+     * @param \Oro\Bundle\IssueBundle\Entity\Issue $relatedIssue
+     */
+    public function removeRelatedIssue(\Oro\Bundle\IssueBundle\Entity\Issue $relatedIssue)
+    {
+        $this->relatedIssues->removeElement($relatedIssue);
+    }
+
+    /**
+     * Get relatedIssues
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRelatedIssues()
+    {
+        return $this->relatedIssues;
+    }
+
+    /**
+     * Add issuesRelated
+     *
+     * @param \Oro\Bundle\IssueBundle\Entity\Issue $issuesRelated
+     *
+     * @return Issue
+     */
+    public function addIssuesRelated(\Oro\Bundle\IssueBundle\Entity\Issue $issuesRelated)
+    {
+        $this->issuesRelated[] = $issuesRelated;
+
+        return $this;
+    }
+
+    /**
+     * Remove issuesRelated
+     *
+     * @param \Oro\Bundle\IssueBundle\Entity\Issue $issuesRelated
+     */
+    public function removeIssuesRelated(\Oro\Bundle\IssueBundle\Entity\Issue $issuesRelated)
+    {
+        $this->issuesRelated->removeElement($issuesRelated);
+    }
+
+    /**
+     * Get issuesRelated
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getIssuesRelated()
+    {
+        return $this->issuesRelated;
     }
 }
