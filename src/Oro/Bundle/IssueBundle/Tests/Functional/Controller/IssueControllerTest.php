@@ -19,13 +19,14 @@ class IssueControllersTest extends WebTestCase
     {
         $crawler = $this->client->request('GET', $this->getUrl('issue_create'));
         $form = $crawler->selectButton('Save')->form();
-        $form['oro_issue[summary]'] = 'New Issue';
-        $form['oro_issue[code]'] = '0001';
-        $form['oro_issue[description]'] = 'New description';
-        $form['oro_issue[issueType]'] = 'Bug';
-        $form['oro_issue[issuePriority]'] = 'low';
-        $form['oro_issue[reporter]'] = '1';
-        $form['oro_issue[assignee]'] = '1';
+        $form['oro_issue_issue_form[summary]'] = 'New Issue';
+        $form['oro_issue_issue_form[code]'] = '0001';
+        $form['oro_issue_issue_form[description]'] = 'New description';
+        $form['oro_issue_issue_form[issueType]'] = 'Bug';
+        $form['oro_issue_issue_form[issuePriority]'] = 'low';
+        $form['oro_issue_issue_form[reporter]'] = '1';
+        $form['oro_issue_issue_form[assignee]'] = '1';
+
         $this->client->followRedirects(true);
         $crawler = $this->client->submit($form);
         $result = $this->client->getResponse();
@@ -49,8 +50,10 @@ class IssueControllersTest extends WebTestCase
             $this->getUrl('issue_update', array('id' => $result['id']))
         );
         $form = $crawler->selectButton('Save')->form();
-        $form['oro_issue[summary]'] = 'updated summary';
-        $form['oro_issue[description]'] = 'Description updated';
+
+        $form['oro_issue_issue_form[summary]'] = 'test of issue update';
+        $form['oro_issue_issue_form[description]'] = 'Description updated';
+
         $this->client->followRedirects(true);
         $crawler = $this->client->submit($form);
         $result = $this->client->getResponse();
@@ -74,7 +77,9 @@ class IssueControllersTest extends WebTestCase
         );
         $result = $this->client->getResponse();
         $this->assertHtmlResponseStatusCodeEquals($result, 200);
-        $this->assertContains('updated summary', $result->getContent());
+
+        $this->assertContains('test of issue update', $result->getContent());
+
     }
     /**
      * @depends testUpdate
@@ -84,6 +89,8 @@ class IssueControllersTest extends WebTestCase
         $this->client->request('GET', $this->getUrl('issue_index'));
         $result = $this->client->getResponse();
         $this->assertHtmlResponseStatusCodeEquals($result, 200);
-        $this->assertContains('The issue is saved', $result->getContent());
+
+        $this->assertContains('test of issue update', $result->getContent());
+
     }
 }
