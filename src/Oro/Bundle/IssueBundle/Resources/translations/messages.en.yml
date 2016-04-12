@@ -28,6 +28,7 @@ oro:
             order.label: Order
         saved_message: The issue is saved
         my_issues: My Issues
+        nav_item: Issues
 
 
 
