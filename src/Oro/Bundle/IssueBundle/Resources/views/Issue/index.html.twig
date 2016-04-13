@@ -4,6 +4,14 @@
 {% set gridName = 'issue-grid' %}
 
 {% block navButtons %}
+    {% include 'OroImportExportBundle:ImportExport:buttons.html.twig' with {
+    entity_class: entity_class,
+    exportProcessor: 'oro_issue_export',
+    exportTemplateProcessor: 'oro_issue_template',
+    importProcessor: 'oro_issue.add_or_replace',
+    importTitle: 'oro.issue.import'|trans,
+    dataGridName: gridName
+    } %}
     {% if resource_granted('oro_issue_view') %}
         <div class="btn-group">
             {{ UI.addButton({
