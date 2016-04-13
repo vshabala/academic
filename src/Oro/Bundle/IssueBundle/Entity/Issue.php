@@ -66,10 +66,9 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      *      "dataaudit"={
      *           "auditable"=true
      *       },
-     *       "importexport"={
-     *           "header"="Id",
-     *           "order"="10"
-     *        }
+              "importexport"={
+     *          "excluded"=true
+     *      }
      *   }
      * )
      */
@@ -79,26 +78,19 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      * @var string $code
      *
      * @ORM\Column(name="code", type="string", length=50, nullable=false)
-     */
-    protected $code;
-
-    /**
-     * @var Organization
-     *
-     * @ORM\ManyToOne(targetEntity="Oro\Bundle\OrganizationBundle\Entity\Organization")
-     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", onDelete="SET NULL")
      * @ConfigField(
      *   defaultValues={
      *      "dataaudit"={
      *           "auditable"=true
      *       },
      *       "importexport"={
-     *          "excluded"=true
+     *           "header"="Code",
+     *           "order"="10"
      *        }
      *   }
      * )
      */
-    protected $organization;
+    protected $code;
 
     /**
      * @var string $summary
@@ -111,12 +103,89 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      *       },
      *       "importexport"={
      *           "header"="Summary",
-     *           "order"="30"
+     *           "order"="15"
      *       }
      *   }
      * )
      */
     protected $summary;
+
+    /**
+     * @var string $description
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     * @ConfigField(
+     *   defaultValues={
+     *      "dataaudit"={
+     *           "auditable"=true
+     *       },
+     *       "importexport"={
+     *           "header"="Description",
+     *           "order"="20"
+     *       }
+     *   }
+     * )
+     */
+    protected $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="issue_type", type="string", length=32, nullable=false)
+     * @Assert\NotBlank()
+     * @Assert\Regex("/^(Bug|Task|Subtask|Story)/")
+     * @ConfigField(
+     *   defaultValues={
+     *      "dataaudit"={
+     *           "auditable"=true
+     *       },
+     *         "importexport"={
+     *           "header"="Type",
+     *           "order"="25"
+     *       }
+     *   }
+     * )
+     */
+    protected $issueType;
+
+    /**
+     * @var IssuePriority
+     *
+     * @ORM\ManyToOne(targetEntity="IssuePriority")
+     * @ORM\JoinColumn(name="issue_priority_name", referencedColumnName="name", onDelete="SET NULL")
+     * @ConfigField(
+     *   defaultValues={
+     *      "dataaudit"={
+     *           "auditable"=true
+     *       },
+     *       "importexport"={
+     *           "header"="Priority",
+     *           "order"="30"
+     *       }
+     *   }
+     * )
+     */
+    protected $issuePriority;
+
+    /**
+     * @var IssueResolution
+     *
+     * @ORM\ManyToOne(targetEntity="IssueResolution")
+     * @ORM\JoinColumn(name="issue_resolution_name", referencedColumnName="name", onDelete="SET NULL")
+     * @ConfigField(
+     *   defaultValues={
+     *      "dataaudit"={
+     *           "auditable"=true
+     *       },
+     *       "importexport"={
+     *           "header"="Resolution",
+     *           "order"="35"
+     *       }
+     *   }
+     * )
+     */
+    protected $issueResolution;
+
 
     /**
      * @var parent
@@ -130,7 +199,7 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      *       },
      *       "importexport"={
      *           "header"="Parent",
-     *           "order"="100"
+     *           "order"="40"
      *       }
      *   }
      * )
@@ -151,12 +220,7 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      */
     protected $children;
 
-    /**
-     * @var string $description
-     *
-     * @ORM\Column(name="description", type="text", nullable=true)
-     */
-    protected $description;
+
 
     /**
      * @var reporter
@@ -169,8 +233,8 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      *           "auditable"=true
      *       },
      *       "importexport"={
-     *           "header"="Description",
-     *           "order"="40"
+     *           "header"="Reporter",
+     *           "order"="45"
      *       }
      *   }
      * )
@@ -188,13 +252,32 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      *           "auditable"=true
      *       },
      *       "importexport"={
-     *           "header"="Reporter",
-     *           "order"="80"
+     *           "header"="Assignee",
+     *           "order"="50"
      *       }
      *   }
      * )
      */
     protected $assignee;
+
+    /**
+     * @var Organization
+     *
+     * @ORM\ManyToOne(targetEntity="Oro\Bundle\OrganizationBundle\Entity\Organization")
+     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ConfigField(
+     *   defaultValues={
+     *      "dataaudit"={
+     *           "auditable"=true
+     *       },
+     *       "importexport"={
+     *           "header"="Oragnization",
+     *           "order"="55"
+     *        }
+     *   }
+     * )
+     */
+    protected $organization;
 
     /**
      * @var WorkflowItem
@@ -207,8 +290,8 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      *           "auditable"=true
      *       },
      *       "importexport"={
-     *           "header"="Assignee",
-     *           "order"="90"
+     *           "header"="Status",
+     *           "order"="60"
      *       }
      *   }
      * )
@@ -229,62 +312,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      */
     protected $workflowStep;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="issue_type", type="string", length=32, nullable=false)
-     * @Assert\NotBlank()
-     * @Assert\Regex("/^(Bug|Task|Subtask|Story)/")
-     * @ConfigField(
-     *   defaultValues={
-     *      "dataaudit"={
-     *           "auditable"=true
-     *       },
-     *        "importexport"={
-     *          "excluded"=true
-     *      }
-     *   }
-     * )
-     */
-    protected $issueType;
-
-    /**
-     * @var IssuePriority
-     *
-     * @ORM\ManyToOne(targetEntity="IssuePriority")
-     * @ORM\JoinColumn(name="issue_priority_name", referencedColumnName="name", onDelete="SET NULL")
-     * @ConfigField(
-     *   defaultValues={
-     *      "dataaudit"={
-     *           "auditable"=true
-     *       },
-     *       "importexport"={
-     *           "header"="Priority",
-     *           "order"="60"
-     *       }
-     *   }
-     * )
-     */
-    protected $issuePriority;
-
-    /**
-     * @var IssueResolution
-     *
-     * @ORM\ManyToOne(targetEntity="IssueResolution")
-     * @ORM\JoinColumn(name="issue_resolution_name", referencedColumnName="name", onDelete="SET NULL")
-     * @ConfigField(
-     *   defaultValues={
-     *      "dataaudit"={
-     *           "auditable"=true
-     *       },
-     *       "importexport"={
-     *           "header"="Resolution",
-     *           "order"="70"
-     *       }
-     *   }
-     * )
-     */
-    protected $issueResolution;
 
     /**
      * @ORM\ManyToMany(targetEntity="Oro\Bundle\UserBundle\Entity\User")

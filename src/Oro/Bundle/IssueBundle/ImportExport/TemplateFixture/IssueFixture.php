@@ -48,11 +48,11 @@ class IssueFixture extends AbstractTemplateRepository implements TemplateFixture
                 $entity->setSummary('Example Issue');
                 $entity->setDescription('Example Issue Description');
                 $entity->setType('Task');
-                $entity->setParent('Task');
-                $entity->setPriority(new IssuePriority('normal'));
+                //$entity->setParent('Task');
+                //$entity->setPriority(new IssuePriority('normal'));
                 $entity->setReporter($userRepo->getEntity('test test'));
                 $entity->setAssignee($userRepo->getEntity('test test'));
-                $entity->setOwner($userRepo->getEntity('test test'));
+                //$entity->setOwner($userRepo->getEntity('test test'));
                 $entity->setOrganization($organizationRepo->getEntity('default'));
                 $entity->setCreatedAt(new \DateTime());
                 $entity->setUpdatedAt(new \DateTime());
