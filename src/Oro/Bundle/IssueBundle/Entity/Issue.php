@@ -177,16 +177,14 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      *      "dataaudit"={
      *           "auditable"=true
      *       },
-     *       "importexport"={
-     *           "header"="Resolution",
-     *           "order"="35"
-     *       }
+     *      "importexport"={
+     *          "excluded"=true
+     *      }
      *   }
      * )
      */
     protected $issueResolution;
-
-
+    
     /**
      * @var parent
      *
@@ -197,10 +195,9 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      *      "dataaudit"={
      *           "auditable"=true
      *       },
-     *       "importexport"={
-     *           "header"="Parent",
-     *           "order"="40"
-     *       }
+     *      "importexport"={
+     *          "excluded"=true
+     *      }
      *   }
      * )
      */
@@ -289,10 +286,9 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      *      "dataaudit"={
      *           "auditable"=true
      *       },
-     *       "importexport"={
-     *           "header"="Status",
-     *           "order"="60"
-     *       }
+     *          "importexport"={
+     *          "excluded"=true
+     *      }
      *   }
      * )
      */
