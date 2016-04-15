@@ -10,13 +10,24 @@ use Oro\Bundle\OrganizationBundle\Entity\Organization;
 use Oro\Bundle\UserBundle\Entity\User;
 use Oro\Bundle\UserBundle\Entity\Role;
 use Doctrine\ORM\EntityManager;
+use Oro\Bundle\UserBundle\Migrations\Data\ORM\LoadRolesData;
 
-class LoadUsers extends AbstractFixture implements ContainerAwareInterface
+class LoadUsers extends AbstractFixture implements DependentFixtureInterface, ContainerAwareInterface
 {
     const FLUSH_MAX = 10;
     /** @var ContainerInterface */
     protected $container;
 
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDependencies()
+    {
+        return [
+            'Oro\Bundle\UserBundle\Migrations\Data\ORM\LoadRolesData',
+        ];
+    }
     /**
      * Load users
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
@@ -28,10 +39,7 @@ class LoadUsers extends AbstractFixture implements ContainerAwareInterface
         $lastNames = ['Smith', 'Brown', 'Wilson', 'Miller', 'Taylor', 'Clark', 'Lee'];
         $organization = $manager->getRepository('OroOrganizationBundle:Organization')->getFirst();
         $businessUnit = $manager->getRepository('OroOrganizationBundle:BusinessUnit')->getFirst();
-
-        $role[] = $manager->getRepository('OroUserBundle:Role')->findOneBy(['role' => 'ROLE_MANAGER']);
-        $role[] = $manager->getRepository('OroUserBundle:Role')->findOneBy(['role' => 'ROLE_USER']);
-        $role[] = $manager->getRepository('OroUserBundle:Role')->findOneBy(['role' => 'ROLE_ADMINISTRATOR']);
+        $roles = $manager->getRepository('OroUserBundle:Role')->findAll();
 
         for ($i = 0; $i < 7; $i++) {
             $firstName = $firstNames[$i];
@@ -48,10 +56,11 @@ class LoadUsers extends AbstractFixture implements ContainerAwareInterface
             $user->setLastName($lastName);
             $user->setOwner($businessUnit);
             $user->addBusinessUnit($businessUnit);
-            $user->addRole($role[mt_rand(0,2)]);
+            $user->addRole($roles[mt_rand(0, count($roles)-1)]);
             $user->setOrganization($organization);
             $user->addOrganization($organization);
-            $user->setPlainPassword($username);
+            // very week password - just for demo purposes
+            $user->setPlainPassword($firstName);
             $userManager->updatePassword($user);
             $manager->persist($user);
         }
@@ -65,6 +74,7 @@ class LoadUsers extends AbstractFixture implements ContainerAwareInterface
     {
         $this->container = $container;
     }
+
 
 
 }
