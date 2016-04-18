@@ -283,9 +283,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      * @ORM\JoinColumn(name="workflow_item_id", referencedColumnName="id", onDelete="SET NULL")
      * @ConfigField(
      *   defaultValues={
-     *      "dataaudit"={
-     *           "auditable"=true
-     *       },
      *          "importexport"={
      *          "excluded"=true
      *      }
