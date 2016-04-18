@@ -7,8 +7,6 @@ use Doctrine\DBAL\Schema\Schema;
 use Oro\Bundle\MigrationBundle\Migration\Migration;
 use Oro\Bundle\MigrationBundle\Migration\QueryBag;
 
-
-
 class OroIssueBundle implements Migration
 {
 
@@ -46,6 +44,4 @@ class OroIssueBundle implements Migration
         );
 
     }
-    
-
 }

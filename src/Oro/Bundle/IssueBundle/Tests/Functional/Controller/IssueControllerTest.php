@@ -1,6 +1,7 @@
 <?php
 
 namespace Oro\Bundle\IssueBundle\Tests\Functional\Controller;
+
 use Oro\Bundle\TestFrameworkBundle\Test\WebTestCase;
 
 /**

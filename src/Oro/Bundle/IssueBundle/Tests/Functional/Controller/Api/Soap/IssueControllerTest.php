@@ -1,6 +1,8 @@
 <?php
 namespace Oro\Bundle\IssueBundle\Tests\Functional\Controller\Api\Soap;
+
 use Oro\Bundle\TestFrameworkBundle\Test\WebTestCase;
+
 /**
  * @outputBuffering enabled
  * @dbIsolation

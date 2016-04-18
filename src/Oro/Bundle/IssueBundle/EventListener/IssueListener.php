@@ -9,16 +9,16 @@ use Oro\Bundle\IssueBundle\Entity\Issue;
 
 class IssueListener
 {
-     public function postPersist(LifecycleEventArgs $args)
-     {
-          $entity = $args->getEntity();
+    public function postPersist(LifecycleEventArgs $args)
+    {
+        $entity = $args->getEntity();
 
-          if (!$entity instanceof Note) {
-               return;
-          }
+        if (!$entity instanceof Note) {
+            return;
+        }
 
-          $this->setUpdatedProperties($entity, $args->getEntityManager());
-      }
+        $this->setUpdatedProperties($entity, $args->getEntityManager());
+    }
 
      /**
      * @param Note $note
@@ -30,7 +30,5 @@ class IssueListener
         $issue = $note->getTarget();
 
         $issue->setUpdatedAt($newUpdatedAt);
-
-
     }
 }

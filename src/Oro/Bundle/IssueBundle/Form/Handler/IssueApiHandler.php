@@ -63,6 +63,4 @@ class IssueApiHandler
         $this->manager->persist($entity);
         $this->manager->flush();
     }
-
 }
-

@@ -24,7 +24,5 @@ class IssueRepository extends EntityRepository
             ->groupBy('issue.workflowStep');
         
         return $qb->getQuery()->getArrayResult();
-
     }
-
 }

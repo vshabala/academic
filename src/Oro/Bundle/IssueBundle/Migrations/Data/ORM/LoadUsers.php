@@ -44,8 +44,8 @@ class LoadUsers extends AbstractFixture implements DependentFixtureInterface, Co
         for ($i = 0; $i < 7; $i++) {
             $firstName = $firstNames[$i];
             $lastName = $lastNames[$i];
-            $username = strtolower($firstName . $lastName ). mt_rand(100, 999);
-            $email = $lastName .rand(10,99) . '@' . 'gmail.com';
+            $username = strtolower($firstName . $lastName). mt_rand(100, 999);
+            $email = $lastName .rand(10, 99) . '@' . 'gmail.com';
 
             $userManager = $this->container->get('oro_user.manager');
             $user = $userManager->createUser();
@@ -74,7 +74,4 @@ class LoadUsers extends AbstractFixture implements DependentFixtureInterface, Co
     {
         $this->container = $container;
     }
-
-
-
 }

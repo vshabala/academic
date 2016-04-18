@@ -2,7 +2,6 @@
 
 namespace Oro\Bundle\IssueBundle\Entity;
 
-
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -66,7 +65,7 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      *      "dataaudit"={
      *           "auditable"=true
      *       },
-              "importexport"={
+            "importexport"={
      *          "excluded"=true
      *      }
      *   }
@@ -837,5 +836,4 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     {
         return $this->issuesRelated;
     }
-
 }

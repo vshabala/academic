@@ -37,6 +37,4 @@ class IssueApiType extends IssueType
     {
         return 'issue';
     }
-
 }
-

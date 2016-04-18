@@ -10,7 +10,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
-
 class IssueController extends Controller
 {
     /**
@@ -48,26 +47,27 @@ class IssueController extends Controller
         $issue = new Issue();
         $issue->setReporter($this->getUser());
         $parentId = $request->query->getInt('parent');
-        if ($parentId)
+        if ($parentId) {
             $parent = $this
                 ->getDoctrine()
                 ->getRepository('OroIssueBundle:Issue')
                 ->findOneBy(['id' => $parentId, 'issueType' => 'Story']);
-        if (isset($parent)){
+        }
+        if (isset($parent)) {
             $issue->setParent($parent);
             $issue->setIssueType('Subtask');
         }
 
         $userId = $request->query->getInt('userid');
-        if ($userId)
+        if ($userId) {
             $user = $this
                 ->getDoctrine()
                 ->getRepository('OroUserBundle:User')
                 ->findOneBy(['id' => $userId]);
-        if (isset($user)){
-            $issue->setAssignee($user);
         }
-        else {
+        if (isset($user)) {
+            $issue->setAssignee($user);
+        } else {
             $issue->setAssignee($this->getUser());
         }
 
@@ -225,5 +225,4 @@ class IssueController extends Controller
     {
         return $this->get('oro_entity.routing_helper');
     }
-
 }

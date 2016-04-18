@@ -2,7 +2,6 @@
 
 namespace Oro\Bundle\IssueBundle\Controller\Api\REST;
 
-
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations\NamePrefix;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
@@ -12,7 +11,6 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
-
 
 /**
  * @RouteResource("issue")
@@ -179,5 +177,4 @@ class IssueController extends RestController implements ClassResourceInterface
                 parent::transformEntityField($field, $value);
         }
     }
-
 }

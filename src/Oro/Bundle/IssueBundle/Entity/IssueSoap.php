@@ -3,7 +3,6 @@
 namespace Oro\Bundle\IssueBundle\Entity;
 
 use BeSimple\SoapBundle\ServiceDefinition\Annotation as Soap;
-
 use Oro\Bundle\SoapBundle\Entity\SoapEntityInterface;
 
 /**
@@ -137,5 +136,4 @@ class IssueSoap extends Issue implements SoapEntityInterface
         }
         return null;
     }
-
 }

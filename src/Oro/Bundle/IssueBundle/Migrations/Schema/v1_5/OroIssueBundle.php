@@ -7,8 +7,6 @@ use Doctrine\DBAL\Schema\Schema;
 use Oro\Bundle\MigrationBundle\Migration\Migration;
 use Oro\Bundle\MigrationBundle\Migration\QueryBag;
 
-
-
 class OroIssueBundle implements Migration
 {
 
@@ -28,15 +26,12 @@ class OroIssueBundle implements Migration
         $table->addIndex(['parent_id'], 'UNIQ_DB847212EA750E1', []);
 
         $table->addForeignKeyConstraint(
-               $schema->getTable($this->issueTableName),
-               ['parent_id'],
-               ['id'],
-               ['onDelete' => 'CASCADE', 'onUpdate' => null]
+            $schema->getTable($this->issueTableName),
+            ['parent_id'],
+            ['id'],
+            ['onDelete' => 'CASCADE', 'onUpdate' => null]
         );
 
 
     }
-
-
-
 }

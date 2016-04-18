@@ -65,7 +65,9 @@ class IssueController extends SoapController
     public function deleteAction($id)
     {
         return $this->handleDeleteRequest($id);
+        
     }
+
     /**
      * @return ApiEntityManager
      */
@@ -97,5 +99,4 @@ class IssueController extends SoapController
         unset($data['updatedAt']);
         return true;
     }
-    
 }

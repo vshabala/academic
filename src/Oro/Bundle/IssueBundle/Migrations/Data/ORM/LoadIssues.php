@@ -16,6 +16,7 @@ use Oro\Bundle\OrganizationBundle\Entity\Organization;
 use Oro\Bundle\UserBundle\Entity\User;
 use Oro\Bundle\NoteBundle\Entity\Note;
 use Doctrine\ORM\EntityManager;
+
 class LoadIssues extends AbstractFixture implements DependentFixtureInterface, ContainerAwareInterface
 {
     const FLUSH_MAX = 10;
@@ -94,7 +95,7 @@ class LoadIssues extends AbstractFixture implements DependentFixtureInterface, C
     {
         $total = count($this->data);
         $fieldsToModify = ['code', 'summary', 'description', 'parent'];
-        for($i=0; $i < $total; $i++) {
+        for ($i=0; $i < $total; $i++) {
             $item = $this->data[$i];
             foreach ($fieldsToModify as $field) {
                 $item[$field] = str_replace('000', '100', $item[$field]);
@@ -116,7 +117,6 @@ class LoadIssues extends AbstractFixture implements DependentFixtureInterface, C
         $addedIssues = [];
 
         foreach ($this->data as $item) {
-
             $issue = new Issue();
             $issue->setSummary($item['summary']);
             $issue->setCode($item['code']);
@@ -128,7 +128,7 @@ class LoadIssues extends AbstractFixture implements DependentFixtureInterface, C
             $issue->setOrganization($organization);
             $issue->setWorkflowStep($this->getRandomEntity($workflowSteps));
 
-            if($item['notes']){
+            if ($item['notes']) {
                 for ($i = 0; $i < $item['notes']; $i++) {
                     $note = new Note();
                     $note->setMessage('This is note message '.$i)
@@ -139,14 +139,15 @@ class LoadIssues extends AbstractFixture implements DependentFixtureInterface, C
                 }
             }
 
-            if(isset($item['parent'])){
+            if (isset($item['parent'])) {
                 $parentIssue = $manager ->getRepository('OroIssueBundle:Issue')
                     ->findOneBy(['code' => $item['parent']]);
-                if($parentIssue)
+                if ($parentIssue) {
                     $issue->setParent($parentIssue);
+                }
             }
 
-            if($item['code'] == 'AA-0002'){
+            if ($item['code'] == 'AA-0002') {
                 $issue->addRelatedIssue($addedIssues[0]);
                 $issue->addRelatedIssue($addedIssues[1]);
             }
@@ -159,7 +160,7 @@ class LoadIssues extends AbstractFixture implements DependentFixtureInterface, C
         //Adding tags
         $tagNames = ['banana','apple','orange'];
         $issues = $manager->getRepository('OroIssueBundle:Issue')->findAll();
-        foreach($tagNames as $name) {
+        foreach ($tagNames as $name) {
             $tag = new Tag();
             $tag->setName($name)
                 ->setOwner($this->getRandomEntity($users))
@@ -173,7 +174,7 @@ class LoadIssues extends AbstractFixture implements DependentFixtureInterface, C
                 $tagging->setTag($tag);
                 $tagging->setOwner($this->getRandomEntity($users));
                 $manager->persist($tagging);
-           }
+            }
         }
 
         $manager->flush();
@@ -200,6 +201,4 @@ class LoadIssues extends AbstractFixture implements DependentFixtureInterface, C
     {
         $this->container = $container;
     }
-
-
 }

@@ -34,7 +34,8 @@ class IssueType extends AbstractType
 
         $builder
             ->add(
-                'issueType', 'choice',
+                'issueType',
+                'choice',
                 [
                     'multiple' => false,
                     'label' => 'oro.issue.form.type.label',

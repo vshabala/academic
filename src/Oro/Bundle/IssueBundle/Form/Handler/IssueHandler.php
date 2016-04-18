@@ -47,20 +47,14 @@ class IssueHandler
     public function process(Issue $entity)
     {
         $this->form->setData($entity);
-
         if (in_array($this->request->getMethod(), array('POST', 'PUT'))) {
-     
             $this->form->submit($this->request);
-
             if ($this->form->isValid()) {
-
                 $this->manager->persist($entity);
                 $this->manager->flush();
-
                 return true;
             }
         }
-
         return false;
     }
 
@@ -73,7 +67,4 @@ class IssueHandler
     {
         return $this->form;
     }
-    
 }
-
-
