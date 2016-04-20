@@ -65,7 +65,7 @@ class IssueController extends SoapController
     public function deleteAction($id)
     {
         return $this->handleDeleteRequest($id);
-        
+
     }
 
     /**
@@ -73,7 +73,7 @@ class IssueController extends SoapController
      */
     public function getManager()
     {
-        return $this->container->get('oro_issue.manager.api');
+        return $this->container->get('oro_issue.issue.manager.api');
     }
     /**
      * @return FormInterface

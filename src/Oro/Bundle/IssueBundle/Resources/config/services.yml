@@ -2,7 +2,7 @@ parameters:
     oro_issue.issue.entity.class: Oro\Bundle\IssueBundle\Entity\Issue
     oro_issue.issue.manager.class:  Oro\Bundle\IssueBundle\Entity\IssueManager
     oro_issue.issue.manager.api.class:  Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager
-    orocrm_issue.subscriber.issue_listener.class: Oro\Bundle\IssueBundle\EventListener\IssueListener
+    oro_issue.subscriber.issue_listener.class: Oro\Bundle\IssueBundle\EventListener\IssueListener
 
     oro_issue.issue_types:
         Bug: Bug
@@ -23,8 +23,8 @@ services:
         arguments:
             - %oro_issue.issue.entity.class%
             - @doctrine.orm.entity_manager
-    orocrm_issue.subscriber.issue_listener:
-            class: %orocrm_issue.subscriber.issue_listener.class%
+    oro_issue.subscriber.issue_listener:
+            class: %oro_issue.subscriber.issue_listener.class%
             arguments:
                 - @service_container
             tags:

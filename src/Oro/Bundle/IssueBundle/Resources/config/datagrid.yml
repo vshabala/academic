@@ -1,6 +1,6 @@
 datagrid:
     issue-grid:
-        extended_entity_name: Oro\Bundle\IssueBundle\Entity\Issue
+        extended_entity_name: '%oro_issue.issue.entity.class%'
         source:
             type: orm
             query:
@@ -18,7 +18,7 @@ datagrid:
                     - v.createdAt
                     - v.updatedAt
                 from:
-                    - { table: OroIssueBundle:Issue, alias: v }
+                    - { table: '%oro_issue.issue.entity.class%', alias: v }
                 join:
                     left:
                         - { join: v.reporter, alias: rep }

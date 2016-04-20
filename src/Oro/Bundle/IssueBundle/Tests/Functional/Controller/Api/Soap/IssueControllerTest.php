@@ -2,7 +2,7 @@
 namespace Oro\Bundle\IssueBundle\Tests\Functional\Controller\Api\Soap;
 
 use Oro\Bundle\TestFrameworkBundle\Test\WebTestCase;
-
+use Oro\Bundle\ConfigBundle\Entity;
 /**
  * @outputBuffering enabled
  * @dbIsolation
@@ -31,6 +31,7 @@ class IssueControllerTest extends WebTestCase
      */
     public function testCreate()
     {
+        echo "123"; exit();
         $result = $this->soapClient->createIssue($this->issue);
         $this->assertTrue((bool) $result, $this->soapClient->__getLastResponse());
         return $result;

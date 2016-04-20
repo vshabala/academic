@@ -74,7 +74,7 @@ class IssueController extends Controller
         $formAction = $this->get('oro_entity.routing_helper')
             ->generateUrlByRequest('issue_create', $this->getRequest());
 
-        return $this->update($issue, $formAction);
+        return $this->update($issue, $formAction,$request);
 
     }
 
@@ -93,7 +93,7 @@ class IssueController extends Controller
     public function updateAction(Issue $issue, Request $request)
     {
         $formAction = $this->get('router')->generate('issue_update', ['id' => $issue->getId()]);
-        return $this->update($issue, $formAction);
+        return $this->update($issue, $formAction, $request);
     }
 
     /**
@@ -188,11 +188,11 @@ class IssueController extends Controller
      * @param $formAction
      * @return array
      */
-    private function update(Issue $issue, $formAction)
+    private function update(Issue $issue, $formAction, $request)
     {
         $saved = false;
         if ($this->get('oro_issue.form.handler.issue')->process($issue)) {
-            if (!$this->get('request_stack')->getCurrentRequest()->get('_widgetContainer')) {
+            if (!$request->get('_widgetContainer')) {
                 $this->get('session')->getFlashBag()->add(
                     'success',
                     $this->get('translator')->trans('oro.issue.saved_message')
