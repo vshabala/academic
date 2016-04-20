@@ -20,6 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="Oro\Bundle\IssueBundle\Entity\Repository\IssueRepository")
+ * @ORM\EntityListeners({"Oro\Bundle\IssueBundle\EventListener\IssueUpdateListener"})
  * @ORM\Table(name="oro_issue")
  * @Config(
  *     defaultValues={

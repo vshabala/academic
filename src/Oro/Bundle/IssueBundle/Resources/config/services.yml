@@ -3,6 +3,7 @@ parameters:
     oro_issue.issue.manager.class:  Oro\Bundle\IssueBundle\Entity\IssueManager
     oro_issue.issue.manager.api.class:  Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager
     oro_issue.subscriber.issue_listener.class: Oro\Bundle\IssueBundle\EventListener\IssueListener
+    oro_issue.post_update.issue_listener.class: Oro\Bundle\IssueBundle\EventListener\IssueUpdateListener
 
     oro_issue.issue_types:
         Bug: Bug
@@ -24,11 +25,14 @@ services:
             - %oro_issue.issue.entity.class%
             - @doctrine.orm.entity_manager
     oro_issue.subscriber.issue_listener:
-            class: %oro_issue.subscriber.issue_listener.class%
-            arguments:
-                - @service_container
-            tags:
-                - { name: doctrine.event_listener, event: postPersist }
-
-
-
+        class: %oro_issue.subscriber.issue_listener.class%
+        arguments:
+              - @service_container
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }
+    oro_issue.post_update.issue_listener:
+        class:    %oro_issue.post_update.issue_listener.class%
+        arguments:
+            - @oro_navigation.content.topic_sender
+        tags:
+            - { name: doctrine.orm.entity_listener, event: postUpdate }
