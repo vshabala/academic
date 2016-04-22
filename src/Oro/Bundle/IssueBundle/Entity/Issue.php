@@ -534,7 +534,7 @@ class Issue extends ExtendIssue implements DatesAwareInterface
 
     /**
      * @param User $owningUser
-     * @return Tag
+     * @return Issue
      */
     public function setOwner($owningUser)
     {
@@ -594,15 +594,12 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     /**
      * Set issuePriority
      *
-     * @param \Oro\Bundle\IssueBundle\Entity\IssuePriority $issuePriority
+     * @param IssuePriority $issuePriority
      *
-     * @return Issue
      */
-    public function setIssuePriority(\Oro\Bundle\IssueBundle\Entity\IssuePriority $issuePriority = null)
+    public function setIssuePriority(IssuePriority $issuePriority)
     {
         $this->issuePriority = $issuePriority;
-
-        return $this;
     }
 
     /**
@@ -618,7 +615,7 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     /**
      * Set issueResolution
      *
-     * @param \Oro\Bundle\IssueBundle\Entity\IssueResolution $issueResolution
+     * @param IssueResolution $issueResolution
      *
      * @return Issue
      */
@@ -626,7 +623,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     {
         $this->issueResolution = $issueResolution;
 
-        return $this;
     }
 
     /**
@@ -838,3 +834,4 @@ class Issue extends ExtendIssue implements DatesAwareInterface
         return $this->issuesRelated;
     }
 }
+

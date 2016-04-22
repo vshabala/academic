@@ -4,6 +4,7 @@ namespace Oro\Bundle\IssueBundle\Entity;
 
 use BeSimple\SoapBundle\ServiceDefinition\Annotation as Soap;
 use Oro\Bundle\SoapBundle\Entity\SoapEntityInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @Soap\Alias("Oro.Bundle.IssueBundle.Entity.Issue")
@@ -84,8 +85,13 @@ class IssueSoap extends Issue implements SoapEntityInterface
      */
     protected $children;
 
+   /**
+    * @Soap\ComplexType("int[]", nillable=true)
+    */
+    protected $relatedIssues;
+
     /**
-     * @param IssueSoap $issue
+     * @param Issue $issue
      */
     public function soapInit($issue)
     {
@@ -104,6 +110,7 @@ class IssueSoap extends Issue implements SoapEntityInterface
         $issue->workflowStep = $this->getEntityId($issue->workflowStep);
         $issue->parent = $this->getEntityId($issue->parent);
         $issue->children = $this->cgetEntityId($issue->children);
+       // $issue->relatedIssues = $this->cgetEntityId($issue->relatedIssues);
 
     }
 

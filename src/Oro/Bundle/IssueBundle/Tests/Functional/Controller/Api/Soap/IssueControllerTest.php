@@ -3,6 +3,9 @@ namespace Oro\Bundle\IssueBundle\Tests\Functional\Controller\Api\Soap;
 
 use Oro\Bundle\TestFrameworkBundle\Test\WebTestCase;
 use Oro\Bundle\ConfigBundle\Entity;
+use Oro\Bundle\IssueBundle\Entity\IssuePriority;
+
+
 /**
  * @outputBuffering enabled
  * @dbIsolation
@@ -21,6 +24,8 @@ class IssueControllerTest extends WebTestCase
         'reporter' => 1,
         'assignee' => 1,
     ];
+
+
     protected function setUp()
     {
         $this->initClient(array(), $this->generateWsseAuthHeader());
@@ -31,7 +36,6 @@ class IssueControllerTest extends WebTestCase
      */
     public function testCreate()
     {
-        echo "123"; exit();
         $result = $this->soapClient->createIssue($this->issue);
         $this->assertTrue((bool) $result, $this->soapClient->__getLastResponse());
         return $result;

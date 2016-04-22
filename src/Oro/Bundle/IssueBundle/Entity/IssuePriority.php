@@ -9,7 +9,13 @@ use Oro\Bundle\DataAuditBundle\Metadata\Annotation as Oro;
 /**
  * @ORM\Entity
  * @ORM\Table(name="oro_issue_priority")
- * @Config()
+ * @Config(
+ *      defaultValues={
+ *          "grouping"={
+ *              "groups"={"dictionary"}
+ *          }
+ *      }
+ * )
  */
 class IssuePriority
 {

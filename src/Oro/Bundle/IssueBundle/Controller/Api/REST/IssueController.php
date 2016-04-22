@@ -87,6 +87,7 @@ class IssueController extends RestController implements ClassResourceInterface
      *      resource=true
      * )
      * @AclAncestor("oro_issue_create")
+     * @return Response
      */
     public function postAction()
     {
@@ -121,7 +122,7 @@ class IssueController extends RestController implements ClassResourceInterface
 
     public function getManager()
     {
-        return $this->get('oro_issue.issue.manager.api');
+        return $this->get('oro_issue.manager.api');
     }
 
     /**

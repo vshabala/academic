@@ -4,6 +4,7 @@ namespace Oro\Bundle\IssueBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
+
 /**
  * IssueRepository
  *

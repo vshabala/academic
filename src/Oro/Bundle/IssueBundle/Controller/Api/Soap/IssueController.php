@@ -73,25 +73,26 @@ class IssueController extends SoapController
      */
     public function getManager()
     {
-        return $this->container->get('oro_issue.issue.manager.api');
+        return $this->container->get('oro_issue.manager.api');
     }
     /**
      * @return FormInterface
      */
     public function getForm()
-    {
-        return $this->container->get('oro_issue.form.issue_api.soap');
+    { 
+        return $this->container->get('oro_issue.form.issue_api');
     }
     /**
      * @return ApiFormHandler
      */
     public function getFormHandler()
     {
-        return $this->container->get('oro_issue.form.handler.issue_api.soap');
+        return $this->container->get('oro_issue.form.handler.issue_api');
     }
     /**
      * {@inheritDoc}
      */
+    /*
     protected function fixFormData(array &$data, $entity)
     {
         parent::fixFormData($data, $entity);
@@ -99,4 +100,5 @@ class IssueController extends SoapController
         unset($data['updatedAt']);
         return true;
     }
+    */
 }

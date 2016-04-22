@@ -51,9 +51,11 @@ class IssueType extends AbstractType
                     'label' => 'oro.issue.form.issue_priority.label',
                     'class' => 'Oro\Bundle\IssueBundle\Entity\IssuePriority',
                     'required' => true,
-                    'query_builder' => function (EntityRepository $repository) {
+                 /*   'query_builder' => function (EntityRepository $repository) {
                         return $repository->createQueryBuilder('priority')->orderBy('priority.order');
                     }
+                    */
+
                 ]
             );
         
@@ -64,7 +66,7 @@ class IssueType extends AbstractType
                 [
                     'label' => 'oro.issue.form.issue_resolution.label',
                     'class' => 'Oro\Bundle\IssueBundle\Entity\IssueResolution',
-                    'required' => true,
+                    'required' => false,
                     'query_builder' => function (EntityRepository $repository) {
                         return $repository->createQueryBuilder('resolution')->orderBy('resolution.order');
                     }

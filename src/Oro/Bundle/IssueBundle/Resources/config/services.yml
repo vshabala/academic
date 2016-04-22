@@ -18,7 +18,7 @@ services:
             - @doctrine.orm.entity_manager
             - %oro_issue.issue.entity.class%
             - @router
-    oro_issue.issue.manager.api:
+    oro_issue.manager.api:
         class: %oro_issue.issue.manager.api.class%
         parent: oro_soap.manager.entity_manager.abstract
         arguments:

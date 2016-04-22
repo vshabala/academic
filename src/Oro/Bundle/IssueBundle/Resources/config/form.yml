@@ -5,30 +5,18 @@ parameters:
     oro_issue.issue.form.handler.issue_api.class: Oro\Bundle\IssueBundle\Form\Handler\IssueApiHandler
     oro_issue.manager.api.class: Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager
 
-
 services:
     oro_issue.form.issue:
         class: Symfony\Component\Form\Form
         factory_method: createNamed
         factory_service: form.factory
         arguments: ["oro_issue_issue_form", "oro_issue_issue"]
-
     oro_issue.form.issue_api:
         class: Symfony\Component\Form\Form
-        factory_method: createNamed
-        factory_service: form.factory
+        factory: ['@form.factory', 'createNamed']
         arguments:
-            - ~
             - 'issue'
-
-    oro_issue.form.issue_api.soap:
-            class: Symfony\Component\Form\Form
-            factory_method: createNamed
-            factory_service: form.factory
-            arguments:
-                - 'issue'
-                - 'issue'
-
+            - 'issue'
     oro_issue.form.handler.issue:
         class: %oro_issue.issue.form.handler.issue.class%
         scope: request
@@ -44,35 +32,20 @@ services:
                 - @oro_issue.form.issue_api
                 - @request
                 - @doctrine.orm.entity_manager
-                - @oro_entity.routing_helper
-
-    oro_issue.form.handler.issue_api.soap:
-        class: %oro_issue.issue.form.handler.issue_api.class%
-        scope: request
-        arguments:
-            - @oro_issue.form.issue_api.soap
-            - @request
-            - @doctrine.orm.entity_manager
-            - @oro_entity.routing_helper
-
-
     oro_issue.form.type.issue:
         class: %oro_issue.issue.form.type.issue.class%
         arguments: ['%oro_issue.issue_types%']
         tags:
             - { name: form.type, alias: oro_issue_issue }
-
     oro_issue.form.type.issue_api:
         class: %oro_issue.issue.form.type.issue_api.class%
         arguments: ['%oro_issue.issue_types%']
         tags:
             - { name: form.type, alias: issue }
-
     oro_issue.manager.api:
         class: %oro_issue.manager.api.class%
         parent: oro_soap.manager.entity_manager.abstract
         arguments:
             - %oro_issue.issue.entity.class%
             - @doctrine.orm.entity_manager
-
-
+    

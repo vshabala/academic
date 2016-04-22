@@ -9,7 +9,7 @@ use Oro\Bundle\TestFrameworkBundle\Test\WebTestCase;
  * @dbIsolation
  * @dbReindex
  */
-class IssueControllersTest extends WebTestCase
+class IssueControllerTest extends WebTestCase
 {
     protected function setUp()
     {

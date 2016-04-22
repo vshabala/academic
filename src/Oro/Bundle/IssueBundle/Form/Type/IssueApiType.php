@@ -14,7 +14,7 @@ class IssueApiType extends IssueType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
-        $builder->addEventSubscriber(new PatchSubscriber());
+       // $builder->addEventSubscriber(new PatchSubscriber());
     }
     /**
      * {@inheritdoc}
@@ -24,8 +24,6 @@ class IssueApiType extends IssueType
         $resolver->setDefaults(
             [
                 'data_class' => 'Oro\Bundle\IssueBundle\Entity\Issue',
-                'intention' => 'issue',
-                'cascade_validation' => true,
                 'csrf_protection' => false
             ]
         );
