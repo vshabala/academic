@@ -30,38 +30,36 @@ abstract class AbstractHandlerTest extends \PHPUnit_Framework_TestCase
      * @var Issue
      */
     protected $entity;
-    /**
-     * @var User
-     */
-    protected $user;
+
     /**
      * @var string
      */
-    protected $exceptionMessage = 'Please set your Handler correctly';
+    protected $exceptionMessage = 'Handler does not work correctly';
+
     protected function setUp()
     {
         $this->form = $this->getMockBuilder('Symfony\Component\Form\Form')
             ->disableOriginalConstructor()
             ->getMock();
+
         $this->request = new Request();
+
         $this->manager = $this->getMockBuilder('Doctrine\Common\Persistence\ObjectManager')
             ->disableOriginalConstructor()
             ->getMock();
-        $this->user = $this->getMockBuilder('Oro\Bundle\UserBundle\Entity\User')
-            ->disableOriginalConstructor()
-            ->getMock();
+
         $this->entity  = new Issue();
+
     }
+
     public function testProcessUnsupportedRequest()
     {
-        $this->form->expects($this->once())
-            ->method('setData')
-            ->with($this->entity);
+
         $this->form->expects($this->never())
             ->method('submit');
 
         if ($this->handler instanceof AbstractIssueHandler) {
-            $this->assertFalse($this->handler->process($this->entity, $this->user));
+            $this->assertFalse($this->handler->process($this->entity));
         } else {
             throw new \Exception($this->exceptionMessage);
         }
