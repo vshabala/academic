@@ -364,7 +364,12 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      */
     public function __toString()
     {
-        return $this->getCode()." : ".$this->getSummary();
+       
+        if ($this->getCode() && $this->getSummary()) {
+            return $this->getCode().": ".$this->getSummary();
+        } else {
+            return (string)null;
+        }
     }
 
     /**
@@ -597,7 +602,7 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      * @param IssuePriority $issuePriority
      *
      */
-    public function setIssuePriority(IssuePriority $issuePriority)
+    public function setIssuePriority($issuePriority)
     {
         $this->issuePriority = $issuePriority;
     }

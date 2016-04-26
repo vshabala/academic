@@ -2,8 +2,8 @@
 namespace Oro\Bundle\IssueBundle\Tests\Functional\Controller\Api\Soap;
 
 use Oro\Bundle\TestFrameworkBundle\Test\WebTestCase;
-use Oro\Bundle\ConfigBundle\Entity;
-use Oro\Bundle\IssueBundle\Entity\IssuePriority;
+//use Oro\Bundle\ConfigBundle\Entity;
+//use Oro\Bundle\IssueBundle\Entity\IssuePriority;
 
 
 /**
@@ -15,6 +15,7 @@ class IssueControllerTest extends WebTestCase
     /**
      * @var array
      */
+
     protected $issue = [
         'code' => 'SOAP - 0001',
         'summary' => 'New Issue Soap',
@@ -28,7 +29,15 @@ class IssueControllerTest extends WebTestCase
 
     protected function setUp()
     {
+
         $this->initClient(array(), $this->generateWsseAuthHeader());
+        $user = $this->client->getContainer()
+            ->get('doctrine.orm.default_entity_manager')
+            ->getRepository('OroUserBundle:User')
+            ->findOneById(1);
+
+       $this->issue['reporter']  =  $user;
+       $this->issue['assignee']  =  $user;
         $this->initSoapClient();
     }
     /**

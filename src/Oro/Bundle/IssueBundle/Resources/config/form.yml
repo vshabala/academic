@@ -13,7 +13,8 @@ services:
         arguments: ["oro_issue_issue_form", "oro_issue_issue"]
     oro_issue.form.issue_api:
         class: Symfony\Component\Form\Form
-        factory: ['@form.factory', 'createNamed']
+        factory_method: createNamed
+        factory_service: form.factory
         arguments:
             - 'issue'
             - 'issue'

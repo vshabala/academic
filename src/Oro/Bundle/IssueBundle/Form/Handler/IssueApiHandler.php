@@ -6,33 +6,8 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Oro\Bundle\IssueBundle\Entity\Issue;
 
-class IssueApiHandler
+class IssueApiHandler  extends AbstractIssueHandler
 {
-    /**
-     * @var FormInterface
-     */
-    protected $form;
-    /**
-     * @var Request
-     */
-    protected $request;
-    /**
-     * @var ObjectManager
-     */
-    protected $manager;
-
-    /**
-     *
-     * @param FormInterface $form
-     * @param Request $request
-     * @param ObjectManager $manager
-     */
-    public function __construct(FormInterface $form, Request $request, ObjectManager $manager)
-    {
-        $this->form = $form;
-        $this->request = $request;
-        $this->manager = $manager;
-    }
 
     /**
      * Process form
@@ -53,14 +28,4 @@ class IssueApiHandler
         return false;
     }
 
-    /**
-     * "Success" form handler
-     *
-     * @param Issue $entity
-     */
-    protected function onSuccess(Issue $entity)
-    {
-        $this->manager->persist($entity);
-        $this->manager->flush();
-    }
 }

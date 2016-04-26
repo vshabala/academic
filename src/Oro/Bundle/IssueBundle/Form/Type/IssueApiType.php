@@ -14,7 +14,14 @@ class IssueApiType extends IssueType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
-       // $builder->addEventSubscriber(new PatchSubscriber());
+        $builder->add(
+            'createdAt',
+            'oro_datetime',
+            [
+                'required' => false,
+            ]
+        );
+        $builder->addEventSubscriber(new PatchSubscriber());
     }
     /**
      * {@inheritdoc}
