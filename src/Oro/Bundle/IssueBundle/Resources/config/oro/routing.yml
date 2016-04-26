@@ -3,6 +3,11 @@ oro_issue_bundle:
     type:         annotation
     prefix:       /issue
 
+oro_issue_dashboard:
+    resource:     "@OroIssueBundle/Controller/Dashboard"
+    type:         annotation
+    prefix:       /dashboard
+
 oro_issue_api:
     resource:     "@OroIssueBundle/Controller/Api/Rest/IssueController.php"
     type:         rest

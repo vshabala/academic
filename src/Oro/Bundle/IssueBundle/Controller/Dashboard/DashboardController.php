@@ -1,5 +1,5 @@
 <?php
-namespace ORO\Bundle\IssueBundle\Controller;
+namespace ORO\Bundle\IssueBundle\Controller\Dashboard;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -12,7 +12,7 @@ class DashboardController extends Controller
 
     /**
      *
-     * @Route("/dashboard/issue", name="dashboard_issue")
+     * @Route("/issue", name="dashboard_issue")
      * @Acl(
      *      id="oro_issue_view",
      *      type="entity",
@@ -23,7 +23,9 @@ class DashboardController extends Controller
      */
     public function userIssueAction()
     {
-        return ['widgetName' => 'Your Issue', 'userId'=>$this->getUser()->getId()];
+        $widgetAttr = $this->get('oro_dashboard.widget_configs')->getWidgetAttributesForTwig('user_issue');
+        $widgetAttr['userId'] = $this->getUser()->getId();
+        return  $widgetAttr;
 
     }
 

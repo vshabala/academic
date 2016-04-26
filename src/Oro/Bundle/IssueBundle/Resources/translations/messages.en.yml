@@ -30,6 +30,13 @@ oro:
         related.label: Related Issue
         my_issues: My Issues
         nav_item: Issues
+        widget:
+            status:
+                label: Issues by Status
+                description: Issues by Status
+            user_issue:
+                label: Your Issues
+                description: Your Issues
 
 
 

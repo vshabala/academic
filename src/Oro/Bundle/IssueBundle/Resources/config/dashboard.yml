@@ -1,11 +1,12 @@
 oro_dashboard_config:
     widgets:
         issue_status:
-            label:       Issue By Status
+            label:       'oro.issue.widget.status.label'
             route:       issue_status_chart
             acl:         oro_issue_view
-            description: Issue By Status
+            description: 'oro.issue.widget.status.description'
         user_issue:
-            label:      Your Issue
+            label:      'oro.issue.widget.user_issue.label'
+            description: 'oro.issue.widget.user_issue.description'
             route:      dashboard_issue
             acl:        oro_issue_view
