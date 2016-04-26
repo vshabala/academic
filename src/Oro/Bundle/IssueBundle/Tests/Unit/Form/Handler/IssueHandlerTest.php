@@ -1,7 +1,7 @@
 <?php
-namespace OroAcademic\Bundle\IssueBundle\Tests\Unit\Form\Handler;
+namespace Oro\Bundle\IssueBundle\Tests\Unit\Form\Handler;
 
-use OroAcademic\Bundle\IssueBundle\Form\Handler\IssueHandler;
+use Oro\Bundle\IssueBundle\Form\Handler\IssueHandler;
 
 class IssueHandlerTest extends AbstractHandlerTest
 {
