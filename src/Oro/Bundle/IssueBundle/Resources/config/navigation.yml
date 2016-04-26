@@ -5,9 +5,17 @@ oro_menu_config:
             uri:   issue
             extras:
                 position: 300
+                routes: ['issue_view', 'issue_create', 'issue_update']
 
     tree:
         application_menu:
             children:
                 issue_tab:
                     children:
+
+oro_titles:
+    issue_index: oro.issue.entity_plural_label
+    issue_view: oro.issue.view_issue
+    issue_create: oro.issue.create_issue
+    issue_update: oro.issue.edit_issue
+

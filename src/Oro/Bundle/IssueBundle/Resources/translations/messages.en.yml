@@ -30,6 +30,9 @@ oro:
         related.label: Related Issue
         my_issues: My Issues
         nav_item: Issues
+        create_issue: Create Issue
+        view_issue: View Issue
+        edit_issue: Edit Issue
         widget:
             status:
                 label: Issues by Status
