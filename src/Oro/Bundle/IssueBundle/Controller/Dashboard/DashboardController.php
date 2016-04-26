@@ -1,11 +1,13 @@
 <?php
 namespace ORO\Bundle\IssueBundle\Controller\Dashboard;
 
+use Oro\Bundle\IssueBundle\Entity\Issue;
+use Oro\Bundle\SecurityBundle\Annotation\Acl;
+use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Oro\Bundle\SecurityBundle\Annotation\Acl;
-use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
+use Symfony\Component\HttpFoundation\Request;
 
 class DashboardController extends Controller
 {
@@ -28,8 +30,7 @@ class DashboardController extends Controller
         return  $widgetAttr;
 
     }
-
-
+    
     /**
      * @return array
      *

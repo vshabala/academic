@@ -20,7 +20,7 @@ class DashboardControllerTest extends WebTestCase
         $this->client->request(
             'GET',
             $this->getUrl(
-                'issue_status_chart'
+                'issue_status_chart',[],true
             )
         );
         $result = $this->client->getResponse();
