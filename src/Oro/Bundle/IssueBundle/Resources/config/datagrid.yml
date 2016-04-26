@@ -157,6 +157,7 @@ datagrid:
             bind_parameters:
                 - ids
         filters: ~
+        actions: ~
         options:
             toolbarOptions:
                 hide: true

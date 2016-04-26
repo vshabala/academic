@@ -40,7 +40,7 @@ class LoadIssues extends AbstractFixture implements DependentFixtureInterface, C
         ),
         array(
             'code' => 'AA-0002',
-            'summary' => 'Issue AA-0002 - no notes, 2 related',
+            'summary' => 'Issue AA-0002 - no notes',
             'type' => 'Story',
             'description' => 'This is description of the AA-0002 issue',
             'notes' => 0,
