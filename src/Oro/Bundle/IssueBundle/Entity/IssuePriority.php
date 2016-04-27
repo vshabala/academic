@@ -42,7 +42,7 @@ class IssuePriority
     /**
      * @param string $name
      */
-    public function __construct($name='low')
+    public function __construct($name = 'low')
     {
         $this->name = $name;
     }

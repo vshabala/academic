@@ -839,4 +839,3 @@ class Issue extends ExtendIssue implements DatesAwareInterface
         return $this->issuesRelated;
     }
 }
-

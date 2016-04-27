@@ -26,6 +26,3 @@ class IssueUpdateListener
         $this->sender->send($generator->generate($data, true));
     }
 }
-
-
-

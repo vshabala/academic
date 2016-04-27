@@ -1,6 +1,8 @@
 <?php
 namespace Oro\Bundle\IssueBundle\Tests\Unit\Entity;
+
 use Oro\Bundle\IssueBundle\Entity\Issue;
+
 class IssueTest extends \PHPUnit_Framework_TestCase
 {
     protected $assignee;

@@ -6,7 +6,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Oro\Bundle\IssueBundle\Entity\Issue;
 
-class IssueApiHandler  extends AbstractIssueHandler
+class IssueApiHandler extends AbstractIssueHandler
 {
 
     /**
@@ -27,5 +27,4 @@ class IssueApiHandler  extends AbstractIssueHandler
         }
         return false;
     }
-
 }

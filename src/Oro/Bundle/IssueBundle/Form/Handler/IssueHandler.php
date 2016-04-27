@@ -9,7 +9,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 use Oro\Bundle\IssueBundle\Entity\Issue;
 
-class IssueHandler  extends AbstractIssueHandler
+class IssueHandler extends AbstractIssueHandler
 {
 
     public function process(Issue $entity)
@@ -25,6 +25,4 @@ class IssueHandler  extends AbstractIssueHandler
         }
         return false;
     }
-
-
 }

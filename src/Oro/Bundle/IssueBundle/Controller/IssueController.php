@@ -65,7 +65,7 @@ class IssueController extends Controller
                 ->getRepository('OroUserBundle:User')
                 ->findOneBy(['id' => $userId]);
         }
-        if (isset($user)) {
+        if (isset($user)){
             $issue->setAssignee($user);
         } else {
             $issue->setAssignee($this->getUser());
@@ -74,7 +74,7 @@ class IssueController extends Controller
         $formAction = $this->get('oro_entity.routing_helper')
             ->generateUrlByRequest('issue_create', $this->getRequest());
 
-        return $this->update($issue, $formAction,$request);
+        return $this->update($issue, $formAction, $request);
 
     }
 

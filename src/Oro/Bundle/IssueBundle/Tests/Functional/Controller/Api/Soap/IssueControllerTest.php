@@ -2,9 +2,6 @@
 namespace Oro\Bundle\IssueBundle\Tests\Functional\Controller\Api\Soap;
 
 use Oro\Bundle\TestFrameworkBundle\Test\WebTestCase;
-//use Oro\Bundle\ConfigBundle\Entity;
-//use Oro\Bundle\IssueBundle\Entity\IssuePriority;
-
 
 /**
  * @outputBuffering enabled
@@ -36,8 +33,8 @@ class IssueControllerTest extends WebTestCase
             ->getRepository('OroUserBundle:User')
             ->findOneById(1);
 
-       $this->issue['reporter']  =  $user;
-       $this->issue['assignee']  =  $user;
+        $this->issue['reporter']  =  $user;
+        $this->issue['assignee']  =  $user;
         $this->initSoapClient();
     }
     /**

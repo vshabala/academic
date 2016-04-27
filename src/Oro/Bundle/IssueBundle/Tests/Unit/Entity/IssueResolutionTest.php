@@ -3,7 +3,6 @@ namespace Oro\Bundle\IssueBundle\Tests\Unit\Entity;
 
 use Oro\Bundle\IssueBundle\Entity\IssueResolution;
 
-
 class IssueResolutionTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreate()
