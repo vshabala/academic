@@ -51,7 +51,7 @@ class IssueTypeTest extends \PHPUnit_Framework_TestCase
                     'issueType',
                     'issuePriority',
                     'issueResolution',
-                    'issueResolution',
+                    'relatedIssues',
                 ]
             ]
         ];
