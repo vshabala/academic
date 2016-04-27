@@ -30,7 +30,7 @@ class DashboardController extends Controller
         return  $widgetAttr;
 
     }
-    
+
     /**
      * @return array
      *
