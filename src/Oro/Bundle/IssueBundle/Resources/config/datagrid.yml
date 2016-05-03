@@ -29,26 +29,26 @@ datagrid:
             enable: true
         columns:
             code:
-                label: Code
+                label: oro.issue.code.label
             summary:
-                label: Summary
+                label: oro.issue.summary.label
             issueType:
-                label: Type
+                label: oro.issue.issue_type.label
             issuePriority:
-                label: Priority
+                label: oro.issue.issue_priority.label
                 frontend_type: select
             issueResolution:
-                label: Resolution
+                label: oro.issue.issue_resolution.label
                 frontend_type: select
             reporterName:
-                label: Reporter
+                label: oro.issue.reporter.label
             assigneeName:
-                label: Assignee
+                label: oro.issue.assignee.label
             createdAt:
-                label: created
+                label: oro.ui.created_at
                 frontend_type: date
             updatedAt:
-                label: updated
+                label: oro.ui.created_at
                 frontend_type: date
         properties:
             id: ~
@@ -103,20 +103,20 @@ datagrid:
         actions:
             view:
                 type:          navigate
-                label:         View
+                label:         oro.grid.action.view
                 link:          view_link
                 icon:          eye-open
                 acl_resource:  oro_issue_view
                 rowAction:     true
             update:
                 type:          navigate
-                label:         Update
+                label:         oro.grid.action.update
                 link:          update_link
                 icon:          edit
                 acl_resource:  oro_issue_update
             delete:
                 type:          delete
-                label:         Delete
+                label:         oro.grid.action.delete
                 link:          delete_link
                 icon:          remove
                 acl_resource:  oro_issue_delete

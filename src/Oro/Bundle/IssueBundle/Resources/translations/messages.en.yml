@@ -2,18 +2,27 @@ oro:
     issue:
         controller:
             issue.saved.message: "Issue saved"
-        form:
-            code.label: "Code"
-            summary.label: "Summary"
-            description.label: "Description"
-            type.label: "Type"
-            reporter.label: "Reporter"
-            assignee.label: "Assignee"
-            workflowStep.label: "Workflow Step"
-            issue_resolution.label: "Resolution"
-            issue_priority.label: "Priority"
+        #
+        id.label: "Id"
+        code.label: "Code"
+        summary.label: "Summary"
+        description.label: "Description"
+        issue_type.label: "Type"
+        reporter.label: "Reporter"
+        assignee.label: "Assignee"
+        issue_resolution.label: "Resolution"
+        issue_priority.label: "Priority"
+        collaborators.label: "Collaborators"
+        children.label: "Children"
+        parent.label: "Parent"
+        organization.label: "Organization"
+        related_issues.label: "Related Issues"
+        workflow_item.label: "Workflow item"
+        workflow_step.label: "Status"
+     #
         entity_label: "Issue"
         entity_plural_label: "Issues"
+        Import: "Issues Import"
         issuepriority:
             entity_label: "Issue Priority"
             entity_plural_label: "Issue Priorities"
