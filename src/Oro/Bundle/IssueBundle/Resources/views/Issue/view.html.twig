@@ -60,6 +60,9 @@
                         <a href="{{ path('issue_view', {'id': entity.parent.id}) }}">{{ UI.renderProperty('Parent'|trans, entity.parent.code) }}</a>
                     {% endif %}
                 </div>
+                <div class="responsive-block">
+                    {{ entityConfig.renderDynamicFields(entity) }}
+                </div>
             </div>
         </div>
     {% endset %}
