@@ -17,6 +17,7 @@ oro:
         parent.label: "Parent"
         organization.label: "Organization"
         related_issues.label: "Related Issues"
+        issues_related.label: "Related Issues"
         workflow_item.label: "Workflow item"
         workflow_step.label: "Status"
      #

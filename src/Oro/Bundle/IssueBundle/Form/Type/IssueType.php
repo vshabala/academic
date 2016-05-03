@@ -26,11 +26,11 @@ class IssueType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('summary', 'text', array('label' => 'oro.issue.form.summary.label'))
-            ->add('code', 'text', array('label' => 'oro.issue.form.code.label', 'required' => true))
-            ->add('description', 'textarea', array('label' => 'oro.issue.form.description.label'))
-            ->add('reporter', 'oro_user_select', ['label' => 'oro.issue.form.reporter.label'])
-            ->add('assignee', 'oro_user_select', ['label' => 'oro.issue.form.assignee.label']);
+            ->add('summary', 'text', array('label' => 'oro.issue.summary.label'))
+            ->add('code', 'text', array('label' => 'oro.issue.code.label', 'required' => true))
+            ->add('description', 'textarea', array('label' => 'oro.issue.description.label'))
+            ->add('reporter', 'oro_user_select', ['label' => 'oro.issue.reporter.label'])
+            ->add('assignee', 'oro_user_select', ['label' => 'oro.issue.assignee.label']);
 
         $builder
             ->add(
@@ -38,7 +38,7 @@ class IssueType extends AbstractType
                 'choice',
                 [
                     'multiple' => false,
-                    'label' => 'oro.issue.form.type.label',
+                    'label' => 'oro.issue.issue_type.label',
                     'choices' => $this->issueTypes,
                 ]
             );
@@ -48,7 +48,7 @@ class IssueType extends AbstractType
                 'issuePriority',
                 'translatable_entity',
                 [
-                    'label' => 'oro.issue.form.issue_priority.label',
+                    'label' => 'oro.issue.issue_priority.label',
                     'class' => 'Oro\Bundle\IssueBundle\Entity\IssuePriority',
                     'required' => true,
                  /*   'query_builder' => function (EntityRepository $repository) {
@@ -64,7 +64,7 @@ class IssueType extends AbstractType
                 'issueResolution',
                 'translatable_entity',
                 [
-                    'label' => 'oro.issue.form.issue_resolution.label',
+                    'label' => 'oro.issue.issue_resolution.label',
                     'class' => 'Oro\Bundle\IssueBundle\Entity\IssueResolution',
                     'required' => false,
                     'query_builder' => function (EntityRepository $repository) {
@@ -77,7 +77,7 @@ class IssueType extends AbstractType
                 'relatedIssues',
                 'translatable_entity',
                 [
-                    'label' => 'oro.issue.related.label',
+                    'label' => 'oro.issue.related_issues.label',
                     'class' => 'Oro\Bundle\IssueBundle\Entity\Issue',
                     'multiple' => true,
                     'required' => false
