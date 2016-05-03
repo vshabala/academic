@@ -23,7 +23,7 @@
         'entity':      form.vars.value,
         'indexPath':   path('issue_index'),
         'indexLabel': 'oro.issue.entity_plural_label'|trans,
-        'entityTitle': form.vars.value.name|default('N/A')
+        'entityTitle': form.vars.value.summary|default('N/A')
         } %}
         {{ parent() }}
     {% else %}

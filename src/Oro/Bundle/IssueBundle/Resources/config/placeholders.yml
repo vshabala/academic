@@ -1,5 +1,5 @@
 placeholders:
-    view_pageActions_before:
+    view_navButtons_before:
         items:
             oro_add_issue_button:
                 order: 50
