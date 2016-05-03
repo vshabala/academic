@@ -3,6 +3,12 @@
 {% set pageTitle = 'oro.issue.entity_plural_label'|trans %}
 {% set gridName = 'issue-grid' %}
 
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+    <li>{{'oro.issue.entity_plural_label'|trans }}</li>
+    </ul>
+{% endblock %}
+
 {% block navButtons %}
     {% include 'OroImportExportBundle:ImportExport:buttons.html.twig' with {
     entity_class: entity_class,
