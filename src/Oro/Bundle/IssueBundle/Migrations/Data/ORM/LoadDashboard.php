@@ -1,6 +1,6 @@
 <?php
 
-namespace ORO\Bundle\IssueBundle\Migrations\Data\ORM;
+namespace Oro\Bundle\IssueBundle\Migrations\Data\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;

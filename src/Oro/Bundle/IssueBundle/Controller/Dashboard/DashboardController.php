@@ -1,5 +1,5 @@
 <?php
-namespace ORO\Bundle\IssueBundle\Controller\Dashboard;
+namespace Oro\Bundle\IssueBundle\Controller\Dashboard;
 
 use Oro\Bundle\IssueBundle\Entity\Issue;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;

@@ -37,7 +37,7 @@ class IssueTest extends \PHPUnit_Framework_TestCase
             array('summary', 'Issue 1 - entity test'),
             array('issueType', 'Task'),
             array('description', 'Issue Description'),
-            array('issuePriority', $this->getMock('ORO\Bundle\IssueBundle\Entity\issuePriority')),
+            array('issuePriority', $this->getMock('Oro\Bundle\IssueBundle\Entity\issuePriority')),
             array('reporter', $this->reporter),
             array('assignee', $this->assignee),
             array('organization', $this->organization),
