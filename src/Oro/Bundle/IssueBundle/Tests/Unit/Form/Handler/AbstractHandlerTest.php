@@ -5,7 +5,6 @@ use Oro\Bundle\IssueBundle\Entity\Issue;
 use Oro\Bundle\IssueBundle\Form\Handler\AbstractIssueHandler;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Oro\Bundle\UserBundle\Entity\User;
 use Doctrine\Common\Persistence\ObjectManager;
 
 abstract class AbstractHandlerTest extends \PHPUnit_Framework_TestCase
@@ -79,7 +78,7 @@ abstract class AbstractHandlerTest extends \PHPUnit_Framework_TestCase
         $this->form->expects($this->once())->method('isValid')
             ->will($this->returnValue(true));
         if ($this->handler instanceof AbstractIssueHandler) {
-            $this->assertTrue($this->handler->process($this->entity, $this->user));
+            $this->assertTrue($this->handler->process($this->entity));
         } else {
             throw new \Exception($this->exceptionMessage);
         }
