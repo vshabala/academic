@@ -9,7 +9,7 @@ oro_issue_dashboard:
     prefix:       /dashboard
 
 oro_issue_api:
-    resource:     "@OroIssueBundle/Controller/Api/Rest/IssueController.php"
+    resource:     "@OroIssueBundle/Controller/Api/REST/IssueController.php"
     type:         rest
     prefix:       api/rest/{version}
     requirements:
