@@ -55,6 +55,13 @@ oro:
             user_issue:
                 label: Your Issues
                 description: Your Issues
+        form:
+            issue_type:
+                Bug.label: Bug
+                Subtask.label: Subtask
+                Task.label: Task
+                Story.label: Story
+
 
 
 

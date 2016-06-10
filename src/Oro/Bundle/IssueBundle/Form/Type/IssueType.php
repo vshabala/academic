@@ -3,23 +3,17 @@
 namespace Oro\Bundle\IssueBundle\Form\Type;
 
 use Doctrine\ORM\EntityRepository;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+
+use Oro\Bundle\IssueBundle\Entity\Issue;
 
 class IssueType extends AbstractType
 {
-    /**
-     * @var array
-     */
-    private $issueTypes;
-
-    public function __construct(array $issueTypes)
-    {
-        $this->issueTypes = $issueTypes;
-        unset($this->issueTypes['Subtask']);
-    }
-
 
     /**
      * {@inheritdoc}
@@ -35,31 +29,15 @@ class IssueType extends AbstractType
 
         $builder
             ->add(
-                'issueType',
-                'choice',
-                [
-                    'multiple' => false,
-                    'label' => 'oro.issue.issue_type.label',
-                    'choices' => $this->issueTypes,
-                ]
-            );
-
-        $builder
-            ->add(
                 'issuePriority',
                 'translatable_entity',
                 [
                     'label' => 'oro.issue.issue_priority.label',
                     'class' => 'Oro\Bundle\IssueBundle\Entity\IssuePriority',
                     'required' => true,
-                 /*   'query_builder' => function (EntityRepository $repository) {
-                        return $repository->createQueryBuilder('priority')->orderBy('priority.order');
-                    }
-                    */
-
                 ]
             );
-        
+
         $builder
             ->add(
                 'issueResolution',
@@ -84,6 +62,28 @@ class IssueType extends AbstractType
                     'required' => false
                 ]
             );
+
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            $form = $event->getForm();
+            $data = $event->getData();
+            if ($data instanceof Issue) {
+                if ($data->getIssueType() != "Subtask") {
+                    $form->add(
+                        'issueType',
+                        'choice',
+                        [
+                            'multiple' => false,
+                            'label' => 'oro.issue.issue_type.label',
+                            'choices' => [
+                                Issue::BUG => 'oro.issue.form.issue_type.Bug.label',
+                                Issue::TASK => 'oro.issue.form.issue_type.Task.label',
+                                Issue::STORY => 'oro.issue.form.issue_type.Story.label',
+                            ],
+                        ]
+                    );
+                }
+            }
+        });
     }
 
     /**
@@ -95,7 +95,7 @@ class IssueType extends AbstractType
             array(
                 'data_class' => 'Oro\Bundle\IssueBundle\Entity\Issue',
 
-                'ownership_disabled'      => true,
+                'ownership_disabled' => true,
 
             )
         );

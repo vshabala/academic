@@ -5,12 +5,6 @@ parameters:
     oro_issue.subscriber.issue_listener.class: Oro\Bundle\IssueBundle\EventListener\IssueListener
     oro_issue.post_update.issue_listener.class: Oro\Bundle\IssueBundle\EventListener\IssueUpdateListener
 
-    oro_issue.issue_types:
-        Bug: Bug
-        Task: Task
-        Subtask: Subtask
-        Story: Story
-
 services:
     oro_issue.issue.manager:
         class: %oro_issue.issue.manager.class%

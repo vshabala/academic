@@ -14,9 +14,7 @@ class IssueHandler extends AbstractIssueHandler
 
     public function process(Issue $entity)
     {   
-        if ($entity->getIssueType() == 'Subtask'){
-            $this->form->remove('issueType');
-        }
+
         $this->form->setData($entity);
         if (in_array($this->request->getMethod(), array('POST', 'PUT'))) {
             $this->form->submit($this->request);

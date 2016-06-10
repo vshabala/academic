@@ -55,6 +55,12 @@ class Issue extends ExtendIssue implements DatesAwareInterface
 
     const ENTITY_NAME = 'Oro\Bundle\IssueBundle\Entity\Issue';
 
+    const BUG = 'Bug';
+    const TASK = 'Task';
+    const STORY = 'Story';
+    const SUB_TASK = 'Subtask';
+
+
     /**
      * @var integer
      *

@@ -48,7 +48,8 @@
                 <div class="responsive-block">
                     {{ UI.renderProperty('oro.issue.summary.label'|trans, entity.summary) }}
                     {{ UI.renderProperty('oro.issue.code.label'|trans, entity.code) }}
-                    {{ UI.renderProperty('oro.issue.issue_type.label'|trans, entity.issueType) }}
+                    {{ UI.renderProperty('oro.issue.issue_type.label'|trans,
+                                        ('oro.issue.form.issue_type.' ~  entity.issueType ~ '.label') | trans()) }}
                     {{ UI.renderProperty('oro.issue.issue_priority.label'|trans, entity.issuePriority) }}
                     {{ UI.renderProperty('oro.issue.issue_resolution.label'|trans, entity.issueResolution) }}
                     {{ UI.renderProperty('oro.issue.description.label'|trans, entity.description) }}

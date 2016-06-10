@@ -98,12 +98,8 @@ datagrid:
                     type: string
                     data_name: v.summary
                 issueType:
-                    type: choice
+                    type: string
                     data_name: v.issueType
-                    options:
-                        field_options:
-                            multiple: true
-                            choices: '%oro_issue.issue_types%'
                 issuePriority:
                     label: oro.issue.issuepriority.label
                     type: entity
