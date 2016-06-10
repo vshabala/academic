@@ -2,6 +2,9 @@ oro:
     issue:
         controller:
             issue.saved.message: "Issue saved"
+        actions:
+            create: Create Issue
+            view_all: View All
         #
         id.label: "Id"
         code.label: "Code"
@@ -25,12 +28,14 @@ oro:
         entity_plural_label: "Issues"
         Import: "Issues Import"
         issuepriority:
+            label: "Priority"
             entity_label: "Issue Priority"
             entity_plural_label: "Issue Priorities"
             label.label: Label
             name.label: Name
             order.label: Order
         issueresolution:
+            label: "Resolution"
             entity_label: "Issue Resolution"
             entity_plural_label: "Issue Resolutions"
             label.label: Label

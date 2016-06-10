@@ -17,18 +17,18 @@ class IssueListener
             return;
         }
 
-        $this->setUpdatedProperties($entity, $args->getEntityManager());
+        $this->setUpdatedProperties($entity);
     }
 
      /**
-     * @param Note $note
-     * @param EntityManager $entityManager
+      * @param Note $note
+      *
       */
-    protected function setUpdatedProperties(Note $note, EntityManager $entityManager, $update = false)
+    protected function setUpdatedProperties(Note $note)
     {
         $newUpdatedAt = new \DateTime('now', new \DateTimeZone('UTC'));
         $issue = $note->getTarget();
-
         $issue->setUpdatedAt($newUpdatedAt);
     }
 }
+

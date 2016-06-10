@@ -48,8 +48,6 @@ class IssuePriority
     }
 
     /**
-     * Set name
-     *
      * @param string $name
      *
      * @return IssuePriority
@@ -62,8 +60,6 @@ class IssuePriority
     }
 
     /**
-     * Get name
-     *
      * @return string
      */
     public function getName()
@@ -72,8 +68,6 @@ class IssuePriority
     }
 
     /**
-     * Set label
-     *
      * @param string $label
      *
      * @return IssuePriority
@@ -86,8 +80,6 @@ class IssuePriority
     }
 
     /**
-     * Get label
-     *
      * @return string
      */
     public function getLabel()
@@ -96,8 +88,6 @@ class IssuePriority
     }
 
     /**
-     * Set order
-     *
      * @param integer $order
      *
      * @return IssuePriority
@@ -110,8 +100,6 @@ class IssuePriority
     }
 
     /**
-     * Get order
-     *
      * @return integer
      */
     public function getOrder()

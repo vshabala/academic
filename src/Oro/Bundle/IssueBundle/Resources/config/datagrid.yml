@@ -94,6 +94,42 @@ datagrid:
                 code:
                     type: string
                     data_name: v.code
+                summary:
+                    type: string
+                    data_name: v.summary
+                issueType:
+                    type: choice
+                    data_name: v.issueType
+                    options:
+                        field_options:
+                            multiple: true
+                            choices: '%oro_issue.issue_types%'
+                issuePriority:
+                    label: oro.issue.issuepriority.label
+                    type: entity
+                    data_name: ip.label
+                    options:
+                        field_options:
+                            class: OroIssueBundle:IssuePriority
+                            multiple: true
+                            property: label
+                            translatable_options: false
+                issueResolution:
+                    label: oro.issue.issueresolution.label
+                    type: entity
+                    data_name: ip.label
+                    options:
+                        field_options:
+                            class: OroIssueBundle:IssueResolution
+                            multiple: true
+                            property: label
+                            translatable_options: false
+                reporterName:
+                    type: string
+                    data_name: reporterName
+                assigneeName:
+                    type: string
+                    data_name: assigneeName
                 createdAt:
                     type: date
                     data_name: v.createdAt

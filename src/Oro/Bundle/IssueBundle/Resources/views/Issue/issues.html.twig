@@ -3,7 +3,7 @@
     {{ oro_widget_render({
         'widgetType': 'block',
         'url': path('oro_issue_user_issues', { userId: entity.id }),
-        'title': 'Issues'
+        'title': 'oro.issue.entity_plural_label'
     }) }}
 {% endset %}
 {{ UI.scrollSubblock(null, [widgetContent]) }}

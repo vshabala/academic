@@ -12,22 +12,12 @@ use Oro\Bundle\UserBundle\Entity\Role;
 use Doctrine\ORM\EntityManager;
 use Oro\Bundle\UserBundle\Migrations\Data\ORM\LoadRolesData;
 
-class LoadUsers extends AbstractFixture implements DependentFixtureInterface, ContainerAwareInterface
+class LoadUsers extends AbstractFixture implements ContainerAwareInterface
 {
     const FLUSH_MAX = 10;
     /** @var ContainerInterface */
     protected $container;
 
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDependencies()
-    {
-        return [
-            'Oro\Bundle\UserBundle\Migrations\Data\ORM\LoadRolesData',
-        ];
-    }
     /**
      * Load users
      * @param \Doctrine\Common\Persistence\ObjectManager $manager

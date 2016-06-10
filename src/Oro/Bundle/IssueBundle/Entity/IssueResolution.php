@@ -49,8 +49,6 @@ class IssueResolution
     }
 
     /**
-     * Set name
-     *
      * @param string $name
      *
      * @return IssueResolution
@@ -63,8 +61,6 @@ class IssueResolution
     }
 
     /**
-     * Get name
-     *
      * @return string
      */
     public function getName()
@@ -73,8 +69,6 @@ class IssueResolution
     }
 
     /**
-     * Set label
-     *
      * @param string $label
      *
      * @return IssueResolution
@@ -87,8 +81,6 @@ class IssueResolution
     }
 
     /**
-     * Get label
-     *
      * @return string
      */
     public function getLabel()
@@ -97,8 +89,6 @@ class IssueResolution
     }
 
     /**
-     * Set order
-     *
      * @param integer $order
      *
      * @return IssueResolution
@@ -111,8 +101,6 @@ class IssueResolution
     }
 
     /**
-     * Get order
-     *
      * @return integer
      */
     public function getOrder()

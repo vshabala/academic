@@ -9,7 +9,7 @@
     {% set actions = [{
     'url': path('oro_issue_user_issues',{'userId':userId}),
     'type': 'link',
-    'label': 'View All'
+    'label': 'oro.issue.actions.view_all'|trans,
     }] %}
 
     {{ parent() }}

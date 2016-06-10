@@ -373,8 +373,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Get id
-     *
      * @return integer
      */
     public function getId()
@@ -383,8 +381,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Set code
-     *
      * @param string $code
      *
      * @return Issue
@@ -397,8 +393,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Get code
-     *
      * @return string
      */
     public function getCode()
@@ -407,8 +401,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Set summary
-     *
      * @param string $summary
      *
      * @return Issue
@@ -421,8 +413,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Get summary
-     *
      * @return string
      */
     public function getSummary()
@@ -431,8 +421,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Set description
-     *
      * @param string $description
      *
      * @return Issue
@@ -445,8 +433,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Get description
-     *
      * @return string
      */
     public function getDescription()
@@ -455,8 +441,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Set reporter
-     *
      * @param \Oro\Bundle\UserBundle\Entity\User $reporter
      *
      * @return Issue
@@ -469,8 +453,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Get reporter
-     *
      * @return \Oro\Bundle\UserBundle\Entity\User
      */
     public function getReporter()
@@ -478,11 +460,7 @@ class Issue extends ExtendIssue implements DatesAwareInterface
         return $this->reporter;
     }
 
-
-
     /**
-     * Set assignee
-     *
      * @param \Oro\Bundle\UserBundle\Entity\User $assignee
      *
      * @return Issue
@@ -495,8 +473,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Get assignee
-     *
      * @return \Oro\Bundle\UserBundle\Entity\User
      */
     public function getAssignee()
@@ -504,10 +480,7 @@ class Issue extends ExtendIssue implements DatesAwareInterface
         return $this->assignee;
     }
 
-
     /**
-     * Set organization
-     *
      * @param \Oro\Bundle\OrganizationBundle\Entity\Organization $organization
      *
      * @return Issue
@@ -520,8 +493,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Get organization
-     *
      * @return \Oro\Bundle\OrganizationBundle\Entity\Organization
      */
     public function getOrganization()
@@ -549,8 +520,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Set workflowStep
-     *
      * @param \Oro\Bundle\WorkflowBundle\Entity\WorkflowStep $workflowStep
      *
      * @return Issue
@@ -563,8 +532,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Get workflowStep
-     *
      * @return \Oro\Bundle\WorkflowBundle\Entity\WorkflowStep
      */
     public function getWorkflowStep()
@@ -573,8 +540,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Set workflowItem
-     *
      * @param \Oro\Bundle\WorkflowBundle\Entity\WorkflowItem $workflowItem
      *
      * @return Issue
@@ -587,8 +552,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Get workflowItem
-     *
      * @return \Oro\Bundle\WorkflowBundle\Entity\WorkflowItem
      */
     public function getWorkflowItem()
@@ -597,10 +560,7 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Set issuePriority
-     *
      * @param IssuePriority $issuePriority
-     *
      */
     public function setIssuePriority($issuePriority)
     {
@@ -608,8 +568,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Get issuePriority
-     *
      * @return \Oro\Bundle\IssueBundle\Entity\IssuePriority
      */
     public function getIssuePriority()
@@ -618,10 +576,7 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Set issueResolution
-     *
      * @param IssueResolution $issueResolution
-     *
      * @return Issue
      */
     public function setIssueResolution(\Oro\Bundle\IssueBundle\Entity\IssueResolution $issueResolution = null)
@@ -631,8 +586,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Get issueResolution
-     *
      * @return \Oro\Bundle\IssueBundle\Entity\IssueResolution
      */
     public function getIssueResolution()
@@ -640,27 +593,17 @@ class Issue extends ExtendIssue implements DatesAwareInterface
         return $this->issueResolution;
     }
 
-
-
-
-
     /**
-     * Set issueType
-     *
      * @param string $issueType
-     *
      * @return Issue
      */
     public function setIssueType($issueType)
     {
         $this->issueType = $issueType;
-
         return $this;
     }
 
     /**
-     * Get issueType
-     *
      * @return string
      */
     public function getIssueType()
@@ -669,8 +612,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Set parent
-     *
      * @param \Oro\Bundle\IssueBundle\Entity\Issue $parent
      *
      * @return Issue
@@ -683,8 +624,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Get parent
-     *
      * @return \Oro\Bundle\IssueBundle\Entity\Issue
      */
     public function getParent()
@@ -693,8 +632,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Add child
-     *
      * @param \Oro\Bundle\IssueBundle\Entity\Issue $child
      *
      * @return Issue
@@ -707,8 +644,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Remove child
-     *
      * @param \Oro\Bundle\IssueBundle\Entity\Issue $child
      */
     public function removeChild(\Oro\Bundle\IssueBundle\Entity\Issue $child)
@@ -717,8 +652,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Get children
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getChildren()
@@ -727,8 +660,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Add collaborator
-     *
      * @param \Oro\Bundle\UserBundle\Entity\User $collaborator
      *
      * @return Issue
@@ -744,8 +675,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Remove collaborator
-     *
      * @param \Oro\Bundle\UserBundle\Entity\User $collaborator
      */
     public function removeCollaborator(\Oro\Bundle\UserBundle\Entity\User $collaborator)
@@ -754,8 +683,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Get collaborators
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getCollaborators()
@@ -772,8 +699,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Add relatedIssue
-     *
      * @param \Oro\Bundle\IssueBundle\Entity\Issue $relatedIssue
      *
      * @return Issue
@@ -786,8 +711,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Remove relatedIssue
-     *
      * @param \Oro\Bundle\IssueBundle\Entity\Issue $relatedIssue
      */
     public function removeRelatedIssue(\Oro\Bundle\IssueBundle\Entity\Issue $relatedIssue)
@@ -796,8 +719,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Get relatedIssues
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getRelatedIssues()
@@ -806,8 +727,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Add issuesRelated
-     *
      * @param \Oro\Bundle\IssueBundle\Entity\Issue $issuesRelated
      *
      * @return Issue
@@ -820,8 +739,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Remove issuesRelated
-     *
      * @param \Oro\Bundle\IssueBundle\Entity\Issue $issuesRelated
      */
     public function removeIssuesRelated(\Oro\Bundle\IssueBundle\Entity\Issue $issuesRelated)
@@ -830,8 +747,6 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     }
 
     /**
-     * Get issuesRelated
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getIssuesRelated()
@@ -839,3 +754,4 @@ class Issue extends ExtendIssue implements DatesAwareInterface
         return $this->issuesRelated;
     }
 }
+

@@ -3,6 +3,7 @@ namespace Oro\Bundle\IssueBundle\EventListener;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
+
 use Oro\Bundle\NavigationBundle\Content\TopicSender;
 use Oro\Bundle\IssueBundle\Entity\Issue;
 
