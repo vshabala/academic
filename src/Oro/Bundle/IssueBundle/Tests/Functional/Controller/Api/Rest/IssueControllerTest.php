@@ -31,7 +31,6 @@ class IssueControllerTest extends WebTestCase
     protected function setUp()
     {
         $this->initClient([], $this->generateWsseAuthHeader());
-
         $this->client->request('GET', $this->getUrl('oro_api_get_issues'));
         $issues = $this->getJsonResponseContent($this->client->getResponse(), 200);
         $this->issueTotal = count($issues);

@@ -84,7 +84,7 @@
         'title': '',
         'useSpan': false,
         'data' : [
-        dataGrid.renderGrid('related-issues-grid', {'ids': entity.relatedIssues})
+        dataGrid.renderGrid('related-issues-grid',  {'id': entity.id})
         ]
         }]
         }] ) %}
@@ -96,7 +96,7 @@
         'title': '',
         'useSpan': false,
         'data' : [
-        dataGrid.renderGrid('collaborator-grid', {'ids': entity.collaborators})
+        dataGrid.renderGrid('collaborator-grid', {'id': entity.id})
         ]
         }]
         }] ) %}

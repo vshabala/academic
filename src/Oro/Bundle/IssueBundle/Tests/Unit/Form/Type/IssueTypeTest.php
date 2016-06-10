@@ -1,63 +1,88 @@
 <?php
-
 namespace Oro\Bundle\IssueBundle\Tests\Unit\Form\Type;
-
 use Oro\Bundle\IssueBundle\Form\Type\IssueType;
-
-class IssueTypeTest extends \PHPUnit_Framework_TestCase
+use Symfony\Component\Form\PreloadedExtension;
+use Symfony\Component\Form\Test\FormIntegrationTestCase;
+use Symfony\Component\Form\Test\FormInterface;
+class IssueTypeTest extends FormIntegrationTestCase
 {
     /**
-     * @var TaskType
+     * @var IssueType
      */
-    protected $formType;
+    protected $type;
+    /**
+     * @var string
+     */
+    protected $expectedName;
+    /**
+     * Setup test env
+     */
     protected function setUp()
     {
-        $issueTypes = ['Bug' => 'Bug', 'Test' => 'Test', 'Story' => 'Story'];
-        $this->formType = new IssueType($issueTypes);
+        parent::setUp();
+        $this->type = new IssueType();
+        $this->expectedName = 'oro_issue_issue';
+    }
+
+    public function testGetName()
+    {
+        $this->assertEquals($this->expectedName, $this->type->getName());
     }
     /**
-     * @param array $widgets
-     *
-     * @dataProvider formTypeProvider
+     * @dataProvider issueDataProvider
+     * @param $formData
      */
-    public function testBuildForm(array $widgets)
+    public function testSubmitValidData($formData)
     {
-        $builder = $this->getMockBuilder('Symfony\Component\Form\FormBuilder')
-            ->disableOriginalConstructor()
-            ->getMock();
-        $builder->expects($this->exactly(9))
-            ->method('add')
-            ->will($this->returnSelf());
-
-        foreach ($widgets as $key => $widget) {
-            $builder->expects($this->at($key))
-                ->method('add')
-                ->with($this->equalTo($widget))
-                ->will($this->returnSelf());
-        }
-        $this->formType->buildForm($builder, []);
+        $form = $this->factory->create('form', $this->type);
+        $this->assertFormOptions($form);
+        $form->submit($formData);
+        $this->assertTrue($form->isValid());
+        $this->assertTrue($form->isSynchronized());
     }
-
-    public function formTypeProvider()
+    /**
+     * @return array
+     */
+    public function issueDataProvider()
     {
         return [
-            'all' => [
-                'widgets' => [
-                    'summary',
-                    'code',
-                    'description',
-                    'reporter',
-                    'assignee',
-                    'issueType',
-                    'issuePriority',
-                    'issueResolution',
-                    'relatedIssues',
+            [
+                'formData' => [
+                    'code'          => 'AA-0001',
+                    'summary'       => 'Summary',
+                    'description'   => 'Description',
+                    'type'          => 'Story',
+                    'priority'      => 'Normal',
+                    'assignee'      => 1,
+                    'reporter'      => 1,
+                    'relatedIssues' => [1, 2],
                 ]
             ]
         ];
     }
-    public function testGetName()
+    public function testGetParent()
     {
-        $this->assertEquals('oro_issue_issue', $this->formType->getName());
+        $this->assertEquals('form', $this->type->getParent());
+    }
+
+    /**
+     * @param $form FormInterface
+     */
+    protected function assertFormOptions($form)
+    {
+        $formConfig = $form->getConfig();
+        $this->assertEquals('Oro\Bundle\IssueBundle\Form\Type\IssueType', $formConfig->getOption('data_class'));
+    }
+
+    protected function getExtensions()
+    {
+        return array(
+            new PreloadedExtension(
+                [
+                    'translatable_entity' => $this->getMock('Symfony\Component\Translation\TranslatorInterface')
+                ],
+                []
+            ),
+        );
     }
 }

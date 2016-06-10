@@ -182,12 +182,12 @@ datagrid:
     related-issues-grid:
         extends: issue-grid
         source:
-            query:
-                where:
-                    and:
-                        - v.id IN (:ids)
-            bind_parameters:
-                - ids
+             query:
+                 where:
+                      and:
+                          - :id MEMBER OF v.issuesRelated
+             bind_parameters:
+                 - id
         filters: ~
         actions: ~
         options:
@@ -199,9 +199,18 @@ datagrid:
             query:
                 where:
                     and:
-                        - u.id IN (:ids)
+                        - u.id = collaborators.id
+                join:
+                    inner:
+                        -
+                            join: OroIssueBundle:Issue
+                            alias: issue
+                            conditionType: WITH
+                            condition: "issue.id = :id"
+                    left:
+                        -   { join: issue.collaborators, alias: collaborators }
             bind_parameters:
-                - ids
+                - id
         filters: ~
         actions: ~
         options:

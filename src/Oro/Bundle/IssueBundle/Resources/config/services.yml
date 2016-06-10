@@ -1,7 +1,7 @@
 parameters:
     oro_issue.issue.entity.class: Oro\Bundle\IssueBundle\Entity\Issue
-    oro_issue.issue.manager.class:  Oro\Bundle\IssueBundle\Entity\IssueManager
-    oro_issue.issue.manager.api.class:  Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager
+    oro_issue.issue.manager.class: Oro\Bundle\IssueBundle\Entity\IssueManager
+    oro_issue.issue.manager.api.class: Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager
     oro_issue.subscriber.issue_listener.class: Oro\Bundle\IssueBundle\EventListener\IssueListener
     oro_issue.post_update.issue_listener.class: Oro\Bundle\IssueBundle\EventListener\IssueUpdateListener
 
