@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @Soap\Alias("Oro.Bundle.IssueBundle.Entity.Issue")
+ * @SuppressWarnings(PHPMD.TooManyFields)
  */
 class IssueSoap extends Issue implements SoapEntityInterface
 {

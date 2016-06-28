@@ -145,26 +145,17 @@ class IssueController extends RestController implements ClassResourceInterface
      */
     protected function transformEntityField($field, &$value)
     {
+        if (!$value) return;
         switch ($field) {
-            case 'taskPriority':
-            case 'taskResolution':
-                if ($value) {
-                    $value = $value->getName();
-                }
-                break;
             case 'reporter':
             case 'assignee':
             case 'workflowItem':
-            case 'workflowStep':
             case 'parent':
-                if ($value) {
-                    $value = $value->getId();
-                }
+                $value = $value->getId();
                 break;
             case 'children':
-                if ($value) {
-                    if (is_object($value)) {
-                        $arr = [];
+                if (is_object($value)) {
+                    $arr = [];
                         foreach ($value as $v) {
                             $arr[] = $v->getId();
                         }
@@ -172,7 +163,6 @@ class IssueController extends RestController implements ClassResourceInterface
                     } else {
                         $value = null;
                     }
-                }
                 break;
             default:
                 parent::transformEntityField($field, $value);

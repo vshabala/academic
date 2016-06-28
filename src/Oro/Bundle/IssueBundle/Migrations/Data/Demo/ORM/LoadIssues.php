@@ -109,7 +109,7 @@ class LoadIssues extends AbstractFixture implements DependentFixtureInterface, C
      */
     public function load(ObjectManager $manager)
     {
-        $this->DoubleData(); 
+        $this->DoubleData();
         $organization = $manager->getRepository('OroOrganizationBundle:Organization')->getFirst();
         $users = $manager->getRepository('OroUserBundle:User')->findAll();
         $priorities = $manager->getRepository('OroIssueBundle:IssuePriority')->findAll();

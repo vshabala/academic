@@ -46,7 +46,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          },
  *     }
  *     )
- *
+ * @SuppressWarnings(PHPMD.TooManyFields)
  */
 class Issue extends ExtendIssue implements DatesAwareInterface
 {
@@ -760,4 +760,3 @@ class Issue extends ExtendIssue implements DatesAwareInterface
         return $this->issuesRelated;
     }
 }
-

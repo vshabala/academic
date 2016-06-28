@@ -65,7 +65,7 @@ class IssueController extends Controller
                 ->getRepository('OroUserBundle:User')
                 ->findOneBy(['id' => $userId]);
         }
-        if (isset($user)){
+        if (isset($user)) {
             $issue->setAssignee($user);
         } else {
             $issue->setAssignee($this->getUser());

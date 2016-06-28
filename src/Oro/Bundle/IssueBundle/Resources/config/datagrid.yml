@@ -212,6 +212,7 @@ datagrid:
             bind_parameters:
                 - id
         filters: ~
+        filters: ~
         actions: ~
         options:
             toolbarOptions:

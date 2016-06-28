@@ -31,4 +31,3 @@ class IssueListener
         $issue->setUpdatedAt($newUpdatedAt);
     }
 }
-

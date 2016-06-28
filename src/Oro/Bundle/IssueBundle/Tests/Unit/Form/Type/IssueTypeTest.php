@@ -1,9 +1,11 @@
 <?php
 namespace Oro\Bundle\IssueBundle\Tests\Unit\Form\Type;
+
 use Oro\Bundle\IssueBundle\Form\Type\IssueType;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\FormIntegrationTestCase;
 use Symfony\Component\Form\Test\FormInterface;
+
 class IssueTypeTest extends FormIntegrationTestCase
 {
     /**
