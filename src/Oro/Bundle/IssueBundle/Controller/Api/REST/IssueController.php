@@ -117,9 +117,7 @@ class IssueController extends RestController implements ClassResourceInterface
     {
         return $this->handleDeleteRequest($id);
     }
-
-
-
+    
     public function getManager()
     {
         return $this->get('oro_issue.manager.api');
